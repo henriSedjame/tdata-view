@@ -11,7 +11,7 @@ import {
     setSessionToShow
 } from "../state";
 import {Session} from "../data";
-import {updateSessionToCompare} from "../services";
+import {sessionStorageName, updateSessionToCompare} from "../services";
 import {SessionDataView} from "./SessionDataView";
 
 export interface SessionViewProps {
@@ -20,8 +20,8 @@ export interface SessionViewProps {
 
 const SessionView: Component<SessionViewProps> = (props) => {
 
-    const removeSession = (id: number) => {
-        localStorage.removeItem(`${SESSION_PREFIX}${id}`);
+    const removeSession = () => {
+        localStorage.removeItem(sessionStorageName(props.session.id, props.session.name));
         refetch()
         let ss = sessions();
         if (ss && ss.length === 0) {
@@ -33,6 +33,8 @@ const SessionView: Component<SessionViewProps> = (props) => {
         return isComparing() ||  currentSessionId() !== undefined
     }
 
+    const sessinLabel = props.session.name != '' ? props.session.name : `SESSION #${props.session.id}`
+
     return (
         <>
             <div class={styles.Session}>
@@ -42,13 +44,17 @@ const SessionView: Component<SessionViewProps> = (props) => {
                        onChange={(e) => {
                            updateSessionToCompare(props.session, e.currentTarget.checked)
                        }}/>
-                <b>SESSION #{props.session.id} ( {props.session.datas.length} events )</b>
+                <b>{sessinLabel} ( {props.session.datas.length} events )</b>
                 <div class={styles.BtnsBloc}>
                     <Show
                         when={props.session.id !== sessionToShow()}
                         fallback={
                             <button
-                                class={styles.HideBtn}
+                                classList={{
+                                    [styles.HideBtn]: true,
+                                    [styles.Clickable]: !disableBtns(),
+                                    [styles.Disabled]: disableBtns(),
+                                }}
                                 disabled={disableBtns()}
                                 onClick={() => {
                                     setCollapsed([])
@@ -59,7 +65,11 @@ const SessionView: Component<SessionViewProps> = (props) => {
                         }
                     >
                         <button
-                            class={styles.ShowBtn}
+                            classList={{
+                                [styles.ShowBtn]: true,
+                                [styles.Clickable]: !disableBtns(),
+                                [styles.Disabled]: disableBtns(),
+                            }}
                             disabled={disableBtns()}
                             onClick={() => {
                                 setCollapsed([])
@@ -72,9 +82,13 @@ const SessionView: Component<SessionViewProps> = (props) => {
                     <Show when={props.session.id !== currentSessionId()}
                           fallback={(<div class={styles.EmptyText}>________</div>)}>
                         <button
-                            class={styles.DelBtn}
-                            disabled={disableBtns()}
-                            onClick={() => removeSession(props.session.id)}>DELETE
+                            classList={{
+                                [styles.DelBtn]: true,
+                                [styles.Clickable]: !disableBtns() && props.session.id !== sessionToShow(),
+                                [styles.Disabled]: disableBtns() || props.session.id === sessionToShow(),
+                            }}
+                            disabled={disableBtns() || props.session.id === sessionToShow()}
+                            onClick={() => removeSession()}>DELETE
                         </button>
                     </Show>
                 </div>

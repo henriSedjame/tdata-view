@@ -6,6 +6,7 @@ export interface SessionData{
 }
 export interface Session{
     id: number;
+    name: string;
     datas: SessionData[]
 }
 

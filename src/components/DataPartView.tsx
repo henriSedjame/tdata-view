@@ -17,7 +17,8 @@ export const DataPartView: Component<DataPartViewProps> = (props) => {
     const isCollapsed = () => {
         return collapsed().includes(fullName)
     }
-    const value =  isObj ? " { ...}" : props.part.data
+
+    const value =  isObj ? " { ... }" : props.part.data
     return (
         <div class={styles.DataPartBloc}>
             <Show when={isObj}>
@@ -28,14 +29,9 @@ export const DataPartView: Component<DataPartViewProps> = (props) => {
                 </b>
             </Show>
             <span class={styles.PartName}> {props.part.name} </span> <span class={styles.Grey}> : </span>
-
-
                 <Show
                     when={isObj && isCollapsed()}
-                    fallback={
-                        <span class={styles.PartValue}> {value} </span>
-
-                    }
+                    fallback={ <span class={styles.PartValue}> {value} </span> }
                 >
                     <For each={props.part.data}>
                         {

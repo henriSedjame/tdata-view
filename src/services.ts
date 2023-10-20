@@ -1,5 +1,5 @@
 import {fetchEventSource} from "@microsoft/fetch-event-source";
-import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, URL} from "./constants";
+import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, SLASH, SPACE_REPLACER, URL} from "./constants";
 import {
     collapsed,
     currentSessionId,
@@ -35,8 +35,12 @@ export function isStoreable(data: SessionData) {
     return true;
 }
 
-export function addNewSession(id: number) {
-    localStorage.setItem(`${SESSION_PREFIX}${id}`, JSON.stringify([]));
+export const sessionStorageName = (id: number, sessionName: string) => {
+    if (sessionName != '') return `${SESSION_PREFIX}${id}${SLASH}${sessionName.replaceAll(" ", SPACE_REPLACER)}`
+    else return `${SESSION_PREFIX}${id}`
+}
+export function addNewSession(id: number, sessionName: string) {
+    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
 }
 
 export function updateSessionToCompare(session: Session, select: boolean) {
@@ -99,6 +103,7 @@ export function collapse(fullName : string) {
         setCollapsed([...collapsed(), fullName])
     }
 }
+
 export function getLastSessionId() {
     let i = undefined
     for (const key in localStorage) {

@@ -2,13 +2,20 @@
   text-align: center;
 }
 
+.Clickable {
+  cursor: pointer;
+}
+
+.Disabled {
+  opacity: 0.5;
+}
+
 .Btn {
   padding: 10px 15px;
   margin: 15px;
   background-color: #4CAF50;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   color: white;
 }
 
@@ -33,7 +40,6 @@
   color: #ffffff;
   border: red 1px solid;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .ShowBtn {
@@ -41,7 +47,6 @@
   color: #093302;
   border: #093302 1px solid;
   border-radius: 5px;
-  cursor: pointer;
   margin-right: 2px;
 }
 
@@ -50,7 +55,6 @@
   color: #d35903;
   border: #d35903 1px solid;
   border-radius: 5px;
-  cursor: pointer;
   margin-right: 2px;
 }
 
@@ -90,7 +94,7 @@
 }
 
 .Session {
-  width: 50%;
+  width: 70%;
   background-color: #ebf187;
   padding: 5px;
   margin: 2px auto;
@@ -164,11 +168,12 @@
 }
 
 .DataView {
-  width: 50%;
+  width: 70%;
   background-color: rgba(122, 122, 122, 0.24);
-  margin: 2px auto;
+  margin: 5px auto;
   text-align: start;
-  padding-top: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .DataPartBloc {
@@ -194,4 +199,11 @@
 
 .Collapse {
   cursor: pointer;
+}
+
+.SessionNameInput {
+  height: 15px;
+  width: 300px;
+  padding: 7px;
+  border-radius: 5px;
 }

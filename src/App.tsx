@@ -6,20 +6,12 @@ import {addNewSession, fetchData, initLastTimestamp} from "./services";
 import {SessionList} from "./components/SessionList";
 import {SessionCompareView} from "./components/SessionCompareView";
 import {CURRENT_SESSION_ID} from "./constants";
+import {AddSessionView} from "./components/AddSessionView";
 
 const App: Component = () => {
     initLastTimestamp()
 
     fetchData().then(() => {});
-
-    const startSession = () => {
-        let id = (lastSessionId() || 0) + 1;
-        setCurrentSessionId(id )
-        setLastSessionId(currentSessionId())
-        localStorage.setItem(CURRENT_SESSION_ID, id.toString())
-        addNewSession(id)
-        refetch()
-    }
 
     const stopSession = () => {
         setCurrentSessionId(undefined)
@@ -32,23 +24,19 @@ const App: Component = () => {
 
             <Separator/>
 
-
-            <Show when={currentSessionId()} fallback={
-                <button class={styles.Btn} onClick={() => startSession()}>START A NEW SESSION</button>
-            }>
+            <Show when={currentSessionId()} fallback= { <AddSessionView />}>
                 <h3> Current Session : #{currentSessionId()}</h3>
 
                 <button class={styles.StopBtn} onClick={() => stopSession()}>STOP SESSION</button>
             </Show>
 
-
             <Separator/>
 
             <SessionList />
 
-            <Separator/>
-
             <Show when={isComparing()}>
+                <Separator/>
+
                 <SessionCompareView />
             </Show>
 

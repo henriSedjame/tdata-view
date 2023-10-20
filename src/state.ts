@@ -1,6 +1,6 @@
 import {createResource, createSignal} from "solid-js";
 import {Session, SessionsToCompare} from "./data";
-import {SESSION_PREFIX} from "./constants";
+import {SESSION_PREFIX, SLASH, SPACE_REPLACER} from "./constants";
 import {getLastSessionId, initCurrentSessionId} from "./services";
 
 export const [currentSessionId, setCurrentSessionId] = createSignal(initCurrentSessionId())
@@ -36,8 +36,13 @@ export const [sessions, {mutate, refetch}] = createResource(() => {
     for (let localStorageKey in localStorage) {
         if (localStorageKey.startsWith(SESSION_PREFIX)) {
             let items = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
+            let parts = localStorageKey.split(SESSION_PREFIX);
+            let id_name = parts[1].split(SLASH);
+            let id = Number.parseInt(id_name[0]);
+            let name = id_name.length > 1 ? id_name[1].replaceAll(SPACE_REPLACER, " ") : '';
             datas.push({
-                id: Number.parseInt(localStorageKey.split(SESSION_PREFIX)[1]),
+                id: id,
+                name: name,
                 datas: items
             })
         }
