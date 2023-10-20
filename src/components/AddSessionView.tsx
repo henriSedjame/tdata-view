@@ -1,4 +1,4 @@
-import {Component, createSignal} from "solid-js";
+import {Component, createSignal, Show} from "solid-js";
 import styles from "../App.module.css";
 import {currentSessionId, lastSessionId, refetch, setCurrentSessionId, setLastSessionId} from "../state";
 import {CURRENT_SESSION_ID} from "../constants";
@@ -17,28 +17,44 @@ export const AddSessionView: Component = () => {
         refetch()
     }
 
+    const stopSession = () => {
+        setCurrentSessionId(undefined)
+        localStorage.removeItem(CURRENT_SESSION_ID)
+        setSessionName(null)
+    }
+
     const btnDisabled = () => {
         return sessionName() == null || sessionName()?.length == 0
     }
 
     return (
         <>
-            <input
-                placeholder="Session Name"
-                class={styles.SessionNameInput}
-                value={sessionName() || ""}
-                oninput={(e) => {
-                    if (e.currentTarget.value.length == 0) setSessionName(null)
-                    else setSessionName(e.currentTarget.value)
-                }}/>
-            <button
-                disabled={btnDisabled()}
-                classList={{
-                    [styles.Btn]: true,
-                    [styles.Clickable] : !btnDisabled(),
-                    [styles.Disabled]: btnDisabled(),
-                }}
-                onClick={() => startSession()}>START A NEW SESSION</button>
+            <Show when={currentSessionId()} fallback= {
+                <>
+                    <input
+                        placeholder="Session Name"
+                        class={styles.SessionNameInput}
+                        value={sessionName() || ""}
+                        onInput={(e) => {
+                            if (e.currentTarget.value.length == 0) setSessionName(null)
+                            else setSessionName(e.currentTarget.value)
+                        }}/>
+                    <button
+                        disabled={btnDisabled()}
+                        classList={{
+                            [styles.Btn]: true,
+                            [styles.Clickable]: !btnDisabled(),
+                            [styles.Disabled]: btnDisabled(),
+                        }}
+                        onClick={() => startSession()}>START A NEW SESSION
+                    </button>
+                </>
+            }>
+                <h3> Current Session : {sessionName()}</h3>
+
+                <button class={styles.StopBtn} onClick={() => stopSession()}>STOP SESSION</button>
+            </Show>
+
         </>
     )
 }
