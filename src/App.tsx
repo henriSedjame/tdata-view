@@ -24,8 +24,6 @@ const App: Component = () => {
             <SessionList />
 
             <Show when={isComparing()}>
-                <Separator/>
-
                 <SessionCompareView />
             </Show>
 

@@ -29,8 +29,8 @@ const SessionView: Component<SessionViewProps> = (props) => {
         }
     }
 
-    const disableBtns = () : boolean => {
-        return isComparing() ||  currentSessionId() !== undefined
+    const disableBtns = (): boolean => {
+        return isComparing() || currentSessionId() !== undefined
     }
 
     const sessinLabel = props.session.name != '' ? props.session.name : `SESSION #${props.session.id}`
@@ -44,12 +44,14 @@ const SessionView: Component<SessionViewProps> = (props) => {
                 [styles.Session]: true,
                 [styles.Shadow]: isSelected(),
             }}>
-                <input type="checkbox"
-                       checked={sessionToCompareIds().includes(props.session.id)}
-                       disabled={disableBtns()}
-                       onChange={(e) => {
-                           updateSessionToCompare(props.session, e.currentTarget.checked)
-                       }}/>
+                <input
+                    data-tooltip="Check to compare this session with an other one"
+                    type="checkbox"
+                    checked={sessionToCompareIds().includes(props.session.id)}
+                    disabled={disableBtns()}
+                    onChange={(e) => {
+                        updateSessionToCompare(props.session, e.currentTarget.checked)
+                    }}/>
                 <b>{sessinLabel} ( {props.session.datas.length} events )</b>
                 <div class={styles.BtnsBloc}>
                     <Show
@@ -87,9 +89,9 @@ const SessionView: Component<SessionViewProps> = (props) => {
                                 setCollapsed([])
                                 setSessionToShow(props.session.id)
                             }}><span classList={{
-                                "material-icons": true,
-                                [styles.Green]: true,
-                        }} >keyboard_arrow_down</span>
+                            "material-icons": true,
+                            [styles.Green]: true,
+                        }}>keyboard_arrow_down</span>
                         </button>
                     </Show>
 
@@ -118,7 +120,7 @@ const SessionView: Component<SessionViewProps> = (props) => {
             </div>
 
             <Show when={isSelected()}>
-                <SessionDataView session={props.session} />
+                <SessionDataView session={props.session}/>
             </Show>
 
         </>

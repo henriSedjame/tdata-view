@@ -17,30 +17,51 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
             case DiffType.REMOVED:
                 return styles.Red;
             case DiffType.CHANGED:
-                return styles.Grey;
+                return styles.White;
         }
     }
 
+    const hasDiffs = props.diffs.length > 0
     return (
-        <>
+        <Show when={hasDiffs}>
             <div class={styles.Diff}>
-                <p class={styles.TextInfo}> {props.diffs.length} differences found </p>
-                <Show
-                    when={props.num == comparisonNum()}
-                    fallback={
+                <div class={styles.DiffHead}>
+                    <span class={styles.TextInfo}> {props.diffs.length} differences found </span>
+                    <Show
+                        when={props.num == comparisonNum()}
+                        fallback={
+                            <button
+                                data-tooltip="Show differences"
+                                classList={{
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={() => setComparisonNum(props.num)}
+                            >
+                            <span classList={{
+                                "material-icons": true,
+                                [styles.White]: true,
+                            }}>keyboard_arrow_down</span>
+                            </button>
+                        }
+                    >
                         <button
-                            class={styles.Btn}
-                            onClick={() => setComparisonNum(props.num)}
-                        > SHOW COMPARISON RESULTS </button>
-                    }
-                >
+                            data-tooltip="Hide differences"
+                            classList={{
+                                [styles.IconBtn]: true,
+                                [styles.Clickable]: true,
+                            }}
+                            onClick={() => setComparisonNum(null)}
+                        >
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.White]: true,
+                        }}>keyboard_arrow_up</span>
+                        </button>
+                    </Show>
+                </div>
 
-                    <button
-                        class={styles.StopBtn}
-                        onClick={() => setComparisonNum(null)}
-                    > HIDE COMPARISON RESULTS
-                    </button>
-
+                <Show when={props.num == comparisonNum()}>
                     <For each={props.diffs}>
                         {
                             (partDiff) =>
@@ -61,6 +82,6 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
                 </Show>
 
             </div>
-        </>
+        </Show>
     )
 }

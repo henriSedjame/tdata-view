@@ -1,5 +1,13 @@
 import {Component, For, Show} from "solid-js";
-import {canCompare, isComparing, sessions, setIsComparing, setSessionToShow} from "../state";
+import {
+    canCompare,
+    isComparing,
+    sessions,
+    setComparisonNum,
+    setIsComparing,
+    setSessionsToCompare,
+    setSessionToShow
+} from "../state";
 import SessionView from "./SessionView";
 import styles from "../App.module.css";
 import Separator from "./Separator";
@@ -28,8 +36,21 @@ export const SessionList : Component = () => {
             </For>
 
             <Show when={canCompare() && !isComparing()}>
-                <button class={styles.CompareBtn} onclick={() => startComparison()}> START COMPARISON </button>
+                <button
+                    data-tooltip="Compare selected sessions"
+                    classList={{
+                    [styles.IconBtn]: true,
+                    [styles.Clickable]: true,
+                    [styles.CompareBtn]: true,
+                }} onclick={startComparison}>
+                     <span classList={{
+                         "material-icons": true,
+                         [styles.MediumBtn]: true,
+                         [styles.White]: true,
+                     }}>compare_arrows</span>
+                </button>
             </Show>
+
         </>
     )
 }

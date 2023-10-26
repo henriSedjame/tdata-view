@@ -61,8 +61,24 @@ export const SessionCompareView: Component = () => {
 
     return (
         <>
-            <h3> Compare two sessions </h3>
-            <table>
+            <div class={styles.Title}>
+                <h2> SESSIONS COMPARISON </h2>
+            </div>
+
+            <button
+                data-tooltip="Clear comparison"
+                classList={{
+                    [styles.IconBtn]: true,
+                    [styles.Clickable]: true,
+                }} onClick={stopComparison}>
+                     <span classList={{
+                         "material-icons": true,
+                         [styles.MediumBtn]: true,
+                         [styles.Grey]: true,
+                     }}>cancel</span>
+            </button>
+
+            <table class={styles.SpaceTop}>
                 <thead>
                     <tr>
                         <td><b>{session1.name}</b></td>
@@ -80,19 +96,21 @@ export const SessionCompareView: Component = () => {
                                             {
                                                 (data) =>
                                                     (
-                                                        <Show when={data} fallback={(<td class={styles.EmptyText}> ... </td>)}>
+                                                        <Show when={data}
+                                                              fallback={(<td class={styles.EmptyText}> ... </td>)}>
                                                             <td>{data?.id}</td>
                                                         </Show>
                                                     )
                                             }
                                         </For>
                                     </tr>
+
                                     <tr>
                                         <td colSpan={rowData.datas.length}>
                                             <DiffsView diffs={rowData.diffs} num={rowData.num}/>
                                         </td>
-
                                     </tr>
+
                                 </>
                             )
                     }
@@ -100,7 +118,7 @@ export const SessionCompareView: Component = () => {
                 </tbody>
 
             </table>
-            <button class={styles.StopCompareBtn} onClick={stopComparison}> STOP COMPARISON</button>
+
         </>
     )
 }
