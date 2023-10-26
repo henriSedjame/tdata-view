@@ -4,11 +4,20 @@ import {
     collapsed,
     currentSessionId,
     refetch, sessionName,
-    sessionsToCompare, setCollapsed,
-    setSessionsToCompare
+    sessionsToCompare, setCollapsed, setCurrentSessionId, setSessionName,
+    setSessionsToCompare, setSessionToShow
 } from "./state";
 import {Session, SessionData} from "./data";
 
+export function resetSession(id: number, sessionName: string) {
+    setCollapsed([])
+    setSessionToShow(null)
+    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
+    setCurrentSessionId(id)
+    setSessionName(sessionName)
+    refetch()
+
+}
 export function addToStorage(id: number, sessionName: string, data: SessionData) {
     if (isStoreable(data)) {
 

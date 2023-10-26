@@ -11,7 +11,7 @@ import {
     setSessionToShow
 } from "../state";
 import {Session} from "../data";
-import {sessionStorageName, updateSessionToCompare} from "../services";
+import {resetSession, sessionStorageName, updateSessionToCompare} from "../services";
 import {SessionDataView} from "./SessionDataView";
 
 export interface SessionViewProps {
@@ -97,8 +97,25 @@ const SessionView: Component<SessionViewProps> = (props) => {
 
                     <div class={styles.BtnSeparator}></div>
 
+                    <button
+                        data-tooltip="Reset the session"
+                        classList={{
+                            [styles.IconBtn]: true,
+                            [styles.Clickable]: !disableBtns(),
+                            [styles.Disabled]: disableBtns(),
+                        }}
+                        disabled={disableBtns()}
+                        onClick={() => resetSession(props.session.id, props.session.name)}>
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.Orange]: true,
+                        }}>replay</span>
+                    </button>
+
+                    <div class={styles.BtnSeparator}></div>
+
                     <Show when={props.session.id !== currentSessionId()}
-                          fallback={(<div class={styles.EmptyText}>________</div>)}>
+                          fallback={(<div class={styles.EmptyText}>____</div>)}>
                         <button
                             data-tooltip="Delete the session"
                             classList={{
