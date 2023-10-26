@@ -6,7 +6,6 @@ import {comparisonNum, setComparisonNum} from "../state";
 export interface DiffLineViewProps {
     diffs: DataPartDiff[],
     num: number
-
 }
 
 export const DiffsView: Component<DiffLineViewProps> = (props) => {
@@ -62,8 +61,6 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
                 </Show>
 
             </div>
-
-
         </>
     )
 }

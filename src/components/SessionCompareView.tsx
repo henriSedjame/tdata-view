@@ -1,19 +1,23 @@
 import {Component, For, Show} from "solid-js";
-import {sessions, sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../state";
+import {sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../state";
 import styles from "../App.module.css";
 import {TableRowData} from "../data";
 import {partDiffsOf} from "../utils";
 import {DiffsView} from "./DiffsView";
 
 export const SessionCompareView: Component = () => {
+
+    let first = sessionsToCompare().first!;
+    let second = sessionsToCompare().second!;
+
+    let session1 = first.datas.length > second.datas.length ? first : second;
+    let session2 = first.datas.length > second.datas.length ? second : first;
+
     let dataTable = () => {
         let tdatas: TableRowData[] = [];
 
-        let first = sessionsToCompare().first!;
-        let second = sessionsToCompare().second!;
-
-        let largest = (first.datas.length > second.datas.length ? first : second).datas;
-        let smallest = (first.datas.length > second.datas.length ? second : first).datas;
+        let largest = session1.datas;
+        let smallest = session2.datas;
 
         largest.forEach((data, index) => {
             let trow: TableRowData = {
@@ -54,14 +58,15 @@ export const SessionCompareView: Component = () => {
         })
         setComparisonNum(null)
     }
+
     return (
         <>
             <h3> Compare two sessions </h3>
             <table>
                 <thead>
                     <tr>
-                        <td><b>SESSION #{sessionsToCompare().first!.id}</b></td>
-                        <td><b>SESSION #{sessionsToCompare().second!.id}</b></td>
+                        <td><b>{session1.name}</b></td>
+                        <td><b>{session2.name}</b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,9 +93,7 @@ export const SessionCompareView: Component = () => {
                                         </td>
 
                                     </tr>
-
                                 </>
-
                             )
                     }
                 </For>

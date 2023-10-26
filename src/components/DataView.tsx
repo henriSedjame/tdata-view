@@ -1,4 +1,4 @@
-import {Component, createSignal, For} from "solid-js";
+import {Component, For} from "solid-js";
 import {DataPart, SessionData} from "../data";
 import {partsOf} from "../utils";
 import {DataPartView} from "./DataPartView";
@@ -9,8 +9,8 @@ export interface DataViewProps {
 }
 export const DataView: Component<DataViewProps> = (props) => {
 
-
     const parts = partsOf(props.data)
+
     return (
             <div class={styles.DataView}>
                 <For each={parts}>

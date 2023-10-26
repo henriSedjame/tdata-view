@@ -1,19 +1,35 @@
 import {Component, createSignal, Show} from "solid-js";
 import styles from "../App.module.css";
-import {currentSessionId, lastSessionId, refetch, setCurrentSessionId, setLastSessionId} from "../state";
-import {CURRENT_SESSION_ID} from "../constants";
+import {
+    currentSessionId,
+    lastSessionId,
+    refetch,
+    sessionName,
+    setCurrentSessionId,
+    setLastSessionId,
+    setSessionName
+} from "../state";
+import {CURRENT_SESSION_ID, LAST_TIMESTAMP} from "../constants";
 import {addNewSession} from "../services";
 
 
 export const AddSessionView: Component = () => {
+    const disableStartBtn = () => {
+        return sessionName() == null || sessionName()?.length == 0 || !disableStopBtn()
+    }
 
-    const [sessionName, setSessionName] = createSignal<string | null>(null)
+    const disableStopBtn = () => {
+        return currentSessionId() == undefined || currentSessionId() == null
+    }
+
     const startSession = () => {
         let id = (lastSessionId() || 0) + 1;
         setCurrentSessionId(id)
         setLastSessionId(currentSessionId())
         localStorage.setItem(CURRENT_SESSION_ID, id.toString())
+        localStorage.setItem(LAST_TIMESTAMP, String(new Date().getTime()));
         addNewSession(id, sessionName()!)
+
         refetch()
     }
 
@@ -23,38 +39,68 @@ export const AddSessionView: Component = () => {
         setSessionName(null)
     }
 
-    const btnDisabled = () => {
-        return sessionName() == null || sessionName()?.length == 0
-    }
-
     return (
-        <>
-            <Show when={currentSessionId()} fallback= {
-                <>
-                    <input
-                        placeholder="Session Name"
-                        class={styles.SessionNameInput}
-                        value={sessionName() || ""}
-                        onInput={(e) => {
-                            if (e.currentTarget.value.length == 0) setSessionName(null)
-                            else setSessionName(e.currentTarget.value)
-                        }}/>
-                    <button
-                        disabled={btnDisabled()}
-                        classList={{
-                            [styles.Btn]: true,
-                            [styles.Clickable]: !btnDisabled(),
-                            [styles.Disabled]: btnDisabled(),
-                        }}
-                        onClick={() => startSession()}>START A NEW SESSION
-                    </button>
-                </>
-            }>
-                <h3> Current Session : {sessionName()}</h3>
+        <div class={styles.AddSession}>
+            <Show when={currentSessionId()} fallback={
+                <div>
+                    <div>
+                        <input
+                            placeholder="Enter a session name"
+                            class={styles.SessionNameInput}
+                            value={sessionName() || ""}
+                            onInput={(e) => {
+                                if (e.currentTarget.value.length == 0) setSessionName(null)
+                                else setSessionName(e.currentTarget.value)
+                            }}/>
+                    </div>
 
-                <button class={styles.StopBtn} onClick={() => stopSession()}>STOP SESSION</button>
+
+                </div>
+            }>
+                <h2 class={styles.White}> {sessionName()} </h2>
             </Show>
 
-        </>
+            <div class={styles.AddSessionBtnsBloc}>
+
+                <button
+                    data-tooltip="Start the session"
+                    disabled={disableStartBtn()}
+                    classList={{
+                        [styles.IconBtn]: true,
+                        [styles.Clickable]: !disableStartBtn(),
+                        [styles.Disabled]: disableStartBtn(),
+                    }}
+                    onClick={() => startSession()}>
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.Green]: !disableStartBtn(),
+                            [styles.Grey]: disableStartBtn(),
+                            [styles.BigBtn]: true,
+                        }}>play_circle_outline</span>
+                </button>
+
+
+                <button
+                    data-tooltip="Stop the session"
+                    disabled={disableStopBtn()}
+                    classList={{
+                        [styles.IconBtn]: true,
+                        [styles.Clickable]: !disableStopBtn(),
+                        [styles.Disabled]: disableStopBtn(),
+                    }}
+                    onClick={() => stopSession()}>
+                        <span classList={{
+                            "material-icons-outlined": true,
+                            [styles.Red]: !disableStopBtn(),
+                            [styles.Grey]: disableStopBtn(),
+                            [styles.BigBtn]: true,
+                        }}>stop_circle</span>
+                </button>
+
+
+            </div>
+
+
+        </div>
     )
 }

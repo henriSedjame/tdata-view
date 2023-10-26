@@ -2,6 +2,7 @@ import {Component, For, Show} from "solid-js";
 import {canCompare, isComparing, sessions, setIsComparing, setSessionToShow} from "../state";
 import SessionView from "./SessionView";
 import styles from "../App.module.css";
+import Separator from "./Separator";
 
 export const SessionList : Component = () => {
 
@@ -12,7 +13,11 @@ export const SessionList : Component = () => {
 
     return (
         <>
-            <h3> List of sessions </h3>
+
+            <div class={styles.Title}>
+                <h2> LIST OF SESSIONS </h2>
+            </div>
+
             <For each={sessions()}>
                 {
                     (session) =>

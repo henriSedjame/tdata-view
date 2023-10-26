@@ -5,6 +5,8 @@ import {getLastSessionId, initCurrentSessionId} from "./services";
 
 export const [currentSessionId, setCurrentSessionId] = createSignal(initCurrentSessionId())
 
+export const [sessionName, setSessionName] = createSignal<string | null>(null)
+
 export const [lastSessionId, setLastSessionId] = createSignal(getLastSessionId())
 
 export const [comparisonNum, setComparisonNum] = createSignal<number| null>(null)

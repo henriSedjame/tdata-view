@@ -1,209 +1,278 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .Clickable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .Disabled {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 .Btn {
-  padding: 10px 15px;
-  margin: 15px;
-  background-color: #4CAF50;
-  border-radius: 5px;
-  border: none;
-  color: white;
+    padding: 10px 15px;
+    margin: 15px;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    border: none;
+    color: white;
 }
 
 .StopBtn {
-  padding: 10px 15px;
-  margin: 15px;
-  background-color: #da3036;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  color: white;
+    padding: 10px 15px;
+    margin: 15px;
+    background-color: #da3036;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
 }
 
 .THead {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.DelBtn {
-  background-color: #cc3232;
-  color: #ffffff;
-  border: red 1px solid;
-  border-radius: 5px;
+.IconBtn {
+    border: none;
+    background-color: transparent;
 }
 
+.BigBtn {
+    font-size: 50px;
+}
+
+.MediumBtn {
+    font-size: 40px;
+}
 .ShowBtn {
-  background-color: #ffffff;
-  color: #093302;
-  border: #093302 1px solid;
-  border-radius: 5px;
-  margin-right: 2px;
+    background-color: #ffffff;
+    color: #093302;
+    border: #093302 1px solid;
+    border-radius: 5px;
+    margin-right: 2px;
 }
 
 .HideBtn {
-  background-color: #ffffff;
-  color: #d35903;
-  border: #d35903 1px solid;
-  border-radius: 5px;
-  margin-right: 2px;
+    background-color: #ffffff;
+    color: #d35903;
+    border: #d35903 1px solid;
+    border-radius: 5px;
+    margin-right: 2px;
 }
 
 .CompareLineBtn {
-  background-color: #ffffff;
-  color: #eaa14d;
-  border: #eaa14d 1px solid;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #ffffff;
+    color: #eaa14d;
+    border: #eaa14d 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .CompareBtn {
-  padding: 10px 15px;
-  margin: 15px;
-  background-color: #eaa14d;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  color: white;
+    padding: 10px 15px;
+    margin: 15px;
+    background-color: #eaa14d;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
 }
 
 .StopCompareBtn {
-  padding: 10px 15px;
-  margin: 15px;
-  background-color: #7a7a7a;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  color: white;
+    padding: 10px 15px;
+    margin: 15px;
+    background-color: #7a7a7a;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
 }
 
 .Separator {
-  width: 90%;
-  height: 1px;
-  background-color: #7a7a7a;
-  margin: 10px auto;
+    width: 10%;
+    height: 1px;
+    background-color: #7a7a7a;
+    margin: 30px auto;
 }
 
 .Session {
-  width: 70%;
-  background-color: #ebf187;
-  padding: 5px;
-  margin: 2px auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    width: 70%;
+    padding: 5px;
+    margin: 2px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(128, 128, 128, 0.23);
+    border-bottom: grey 3px solid;
+}
 
+.Shadow {
+    box-shadow: 0 3px 0 rgba(82, 82, 82, 0.5);
 }
 
 .EmptyText {
-  opacity: 0;
+    opacity: 0;
 }
 
 .Green {
-  color: green;
+    color: green;
 }
 
 .Red {
-  color: red;
+    color: red;
 }
 
 .Grey {
-  color: #424242;
+    color: #424242;
 }
 
+.White {
+    color: white;
+}
+
+.Orange {
+    color: #ff9100;
+}
+
+.Purple {
+    color: #7f018a;
+}
 .Diff {
-  margin: 5px;
-  padding-top: 1px;
-  background-color: aquamarine;
+    margin: 5px;
+    padding-top: 1px;
+    background-color: aquamarine;
 }
 
 .DiffName {
-  width: 100%;
-  text-align: center;
-  background-color: white;
+    width: 100%;
+    text-align: center;
+    background-color: white;
 
-  font-weight: bolder;
-  font-size: 14px;
+    font-weight: bolder;
+    font-size: 14px;
 }
 
 .DiffRow {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: rgba(125, 209, 236, 0.76);
-  >div {
     width: 100%;
-    padding: 5px;
-    border: white 1px solid;
-    border-bottom: lightgrey 5px solid;
-    text-align: center;
-  }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgba(125, 209, 236, 0.76);
+
+    > div {
+        width: 100%;
+        padding: 5px;
+        border: white 1px solid;
+        border-bottom: lightgrey 5px solid;
+        text-align: center;
+    }
 }
 
 .TextInfo {
-  font-style: italic;
-  color: #5d5d5d;
+    font-style: italic;
+    color: #5d5d5d;
 }
 
 .EventItem {
-  width: 40%;
-  margin: 2px auto;
-  padding: 5px;
-  background-color: #eaa14d;
-  border-radius: 5px;
+    width: 40%;
+    margin: 2px auto;
+    padding: 5px;
+    background-color: rgba(157, 148, 138, 0.62);
+    border-radius: 5px;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .DataView {
-  width: 70%;
-  background-color: rgba(122, 122, 122, 0.24);
-  margin: 5px auto;
-  text-align: start;
-  padding-top: 10px;
-  padding-bottom: 10px;
+    width: 70%;
+    background-color: rgba(122, 122, 122, 0.24);
+    margin: 5px auto;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .DataPartBloc {
-  margin-left: 25px;
-  padding-bottom: 3px;
+    margin-left: 25px;
+    padding-bottom: 3px;
 
 }
 
 .DataPartChildBloc {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .PartName {
-  font-weight: bolder;
-  font-size: 14px;
+    font-weight: bolder;
+    font-size: 14px;
 }
 
 .PartValue {
-  font-style: italic;
-  font-size: 15px;
-  padding-left: 2px;
+    font-style: italic;
+    font-size: 15px;
+    padding-left: 2px;
 }
 
 .Collapse {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .SessionNameInput {
-  height: 15px;
-  width: 300px;
-  padding: 7px;
-  border-radius: 5px;
+    height: 25px;
+    width: 80%;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.BtnSeparator {
+    width: 1px;
+    height: 25px;
+    background-color: rgba(128, 128, 128, 0.66);
+    margin-left: 4px;
+}
+
+.BtnsBloc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.AddSession {
+    width: 30%;
+    background-color: #808080;
+    border-radius: 5px;
+    margin: auto;
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+
+.AddSessionBtnsBloc {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px auto;
+    padding-top: 2px;
+    background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 25px;
+}
+
+.Title {
+    width: fit-content;
+    margin: 20px auto;
+    border-top: #13697a 1px solid;
+    border-bottom: #13697a 1px solid;
+    color: #13697a;
+}
+
+.SpaceBottom {
+    margin-bottom: 20px;
 }

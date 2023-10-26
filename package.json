@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",
+    "font-awesome": "^4.7.0",
+    "material-icons": "^1.13.12",
     "solid-js": "^1.7.6"
   }
 }

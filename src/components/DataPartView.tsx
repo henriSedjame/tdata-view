@@ -12,13 +12,15 @@ export interface DataPartViewProps {
 
 export const DataPartView: Component<DataPartViewProps> = (props) => {
     const isObj = isObject(props.part.data)
+
     let fullName = props.parentName ? `${props.parentName}.${props.part.name}` : props.part.name
+
+    const value =  isObj ? " { ... }" : props.part.data
 
     const isCollapsed = () => {
         return collapsed().includes(fullName)
     }
 
-    const value =  isObj ? " { ... }" : props.part.data
     return (
         <div class={styles.DataPartBloc}>
             <Show when={isObj}>

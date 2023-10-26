@@ -16,13 +16,10 @@ const App: Component = () => {
 
     return (
         <div>
-            <h1>Data View</h1>
+            <h1 class={styles.Purple}>DATA COMPARE VIEW</h1>
 
-            <Separator/>
 
             <AddSessionView />
-
-            <Separator/>
 
             <SessionList />
 

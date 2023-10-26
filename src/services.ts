@@ -3,16 +3,16 @@ import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, SLASH, SPACE_REPLACE
 import {
     collapsed,
     currentSessionId,
-    refetch,
+    refetch, sessionName,
     sessionsToCompare, setCollapsed,
     setSessionsToCompare
 } from "./state";
 import {Session, SessionData} from "./data";
 
-export function addToStorage(id: number, data: SessionData) {
+export function addToStorage(id: number, sessionName: string, data: SessionData) {
     if (isStoreable(data)) {
 
-        let key = `${SESSION_PREFIX}${id}`;
+        let key = sessionStorageName(id, sessionName);
 
         let item = localStorage.getItem(key)
 
@@ -129,8 +129,11 @@ export  const fetchData = async () => {
             let data = JSON.parse(event.data)
 
             let sid = currentSessionId();
-            if (sid) {
-                addToStorage(sid, {
+
+            let sname = sessionName();
+
+            if (sid && sname) {
+                addToStorage(sid, sname, {
                     id: data.id,
                     timpstamp: data.timestamp,
                     data: data.data,

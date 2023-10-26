@@ -10,8 +10,10 @@ export interface SessionDataViewProps {
 
 export const SessionDataView: Component<SessionDataViewProps> = (props) => {
     return (
-        <>
-            <h3> List of events</h3>
+        <div class={styles.SpaceBottom}>
+            <div class={styles.Title}>
+                <h3> LIST OF EVENTS</h3>
+            </div>
 
             <For each={props.session.datas}>
                 {
@@ -24,23 +26,39 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                         when={schemaToShow() !== `${data.id}_${data.timpstamp}`}
                                         fallback={
                                             <button
-                                                class={styles.HideBtn}
+                                                data-tooltip="Hide the data structure"
+                                                classList={{
+                                                    [styles.IconBtn]: true,
+                                                    [styles.Clickable]: true,
+                                                }}
                                                 onClick={() => {
                                                     setCollapsed([])
                                                     setSchemaToShow(null)
                                                 }
-                                            }
-                                            > Hide schema</button>
+                                                }
+                                            >
+                                                <span classList={{
+                                                    "material-icons": true,
+                                                    [styles.Green]: true,
+                                                }}>keyboard_arrow_up</span>
+                                            </button>
                                         }
                                     >
                                         <button
-                                            class={styles.ShowBtn}
+                                            data-tooltip="Show the data structure"
+                                            classList={{
+                                                [styles.IconBtn]: true,
+                                                [styles.Clickable]: true,
+                                            }}
                                             onclick={() => {
                                                 setCollapsed([])
                                                 setSchemaToShow(`${data.id}_${data.timpstamp}`)
                                             }
-                                        }
-                                        > Show schema
+                                            }
+                                        >  <span classList={{
+                                            "material-icons": true,
+                                            [styles.Green]: true,
+                                        }}>keyboard_arrow_down</span>
                                         </button>
                                     </Show>
                                 </div>
@@ -51,6 +69,6 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                         )
                 }
             </For>
-        </>
+        </div>
     )
 }
