@@ -57,15 +57,17 @@ export const AddSessionView: Component = () => {
 
                 </div>
             }>
-                <h2 class={styles.White}> {sessionName()} </h2>
+                <h2 class={styles.DarkGrey}> {sessionName()} </h2>
             </Show>
 
             <div class={styles.AddSessionBtnsBloc}>
 
                 <button
                     data-tooltip="Start the session"
+
                     disabled={disableStartBtn()}
                     classList={{
+                        "tooltip-left": true,
                         [styles.IconBtn]: true,
                         [styles.Clickable]: !disableStartBtn(),
                         [styles.Disabled]: disableStartBtn(),

@@ -12,11 +12,11 @@ const App: Component = () => {
 
     initLastTimestamp()
 
-    fetchData().then(() => {});
+    //  fetchData().then(() => {});
 
     return (
         <div>
-            <h1 class={styles.Purple}>DATA COMPARE VIEW</h1>
+            <h1 class={styles.White}>DATA COMPARE VIEW</h1>
 
 
             <AddSessionView />

@@ -1,5 +1,5 @@
 import {createResource, createSignal} from "solid-js";
-import {Session, SessionsToCompare} from "./data";
+import {DataPartDiff, Session, SessionsToCompare} from "./data";
 import {SESSION_PREFIX, SLASH, SPACE_REPLACER} from "./constants";
 import {getLastSessionId, initCurrentSessionId} from "./services";
 
@@ -51,3 +51,5 @@ export const [sessions, {mutate, refetch}] = createResource(() => {
     }
     return datas.sort((a, b) => a.id - b.id);
 });
+
+export const [collapsedDiffs, setCollapsedDiffs] = createSignal<string[] >([])

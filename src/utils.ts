@@ -86,7 +86,7 @@ export function partDiffsOf(o1: any, o2: any): DataPartDiff[] {
         }
 
     })
-    return diffs;
+    return diffs.sort((a, b) => a.name.localeCompare(b.name));
 
 }
 

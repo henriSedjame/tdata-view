@@ -34,12 +34,11 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                 onClick={() => {
                                                     setCollapsed([])
                                                     setSchemaToShow(null)
-                                                }
-                                                }
+                                                }}
                                             >
                                                 <span classList={{
                                                     "material-icons": true,
-                                                    [styles.Green]: true,
+                                                    [styles.Black]: true,
                                                 }}>keyboard_arrow_up</span>
                                             </button>
                                         }
@@ -53,11 +52,10 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                             onclick={() => {
                                                 setCollapsed([])
                                                 setSchemaToShow(`${data.id}_${data.timpstamp}`)
-                                            }
-                                            }
+                                            }}
                                         >  <span classList={{
                                             "material-icons": true,
-                                            [styles.Green]: true,
+                                            [styles.Black]: true,
                                         }}>keyboard_arrow_down</span>
                                         </button>
                                     </Show>

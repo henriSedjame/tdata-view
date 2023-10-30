@@ -2,7 +2,7 @@ import {Component, For, Show} from "solid-js";
 import {
     canCompare,
     isComparing,
-    sessions,
+    sessions, sessionsToCompare,
     setComparisonNum,
     setIsComparing,
     setSessionsToCompare,
@@ -36,21 +36,23 @@ export const SessionList : Component = () => {
             </For>
 
             <Show when={canCompare() && !isComparing()}>
-                <button
+                <div
                     data-tooltip="Compare selected sessions"
                     classList={{
-                    [styles.IconBtn]: true,
-                    [styles.Clickable]: true,
-                    [styles.CompareBtn]: true,
-                }} onclick={startComparison}>
+
+                        [styles.Clickable]: true,
+                        [styles.CompareLabel]: true,
+                    }} onClick={startComparison}>
+
+                    <div> {sessionsToCompare().first?.name ?? sessionsToCompare().first?.id}</div>
                      <span classList={{
                          "material-icons": true,
                          [styles.MediumBtn]: true,
                          [styles.White]: true,
                      }}>compare_arrows</span>
-                </button>
+                    <div> {sessionsToCompare().second?.name ?? sessionsToCompare().second?.id}</div>
+                </div>
             </Show>
-
         </>
     )
 }

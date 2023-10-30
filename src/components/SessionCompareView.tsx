@@ -73,8 +73,8 @@ export const SessionCompareView: Component = () => {
                 }} onClick={stopComparison}>
                      <span classList={{
                          "material-icons": true,
-                         [styles.MediumBtn]: true,
-                         [styles.Grey]: true,
+                         [styles.BigBtn]: true,
+                         [styles.LightGrey]: true,
                      }}>cancel</span>
             </button>
 
@@ -98,7 +98,7 @@ export const SessionCompareView: Component = () => {
                                                     (
                                                         <Show when={data}
                                                               fallback={(<td class={styles.EmptyText}> ... </td>)}>
-                                                            <td>{data?.id}</td>
+                                                            <td class={styles.LightGrey}>{data?.id}</td>
                                                         </Show>
                                                     )
                                             }

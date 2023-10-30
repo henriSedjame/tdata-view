@@ -44,15 +44,21 @@ const SessionView: Component<SessionViewProps> = (props) => {
                 [styles.Session]: true,
                 [styles.Shadow]: isSelected(),
             }}>
-                <input
-                    data-tooltip="Check to compare this session with an other one"
-                    type="checkbox"
-                    checked={sessionToCompareIds().includes(props.session.id)}
-                    disabled={disableBtns()}
-                    onChange={(e) => {
-                        updateSessionToCompare(props.session, e.currentTarget.checked)
-                    }}/>
-                <b>{sessinLabel} ( {props.session.datas.length} events )</b>
+                <div class={styles.SessionTitle}>
+                    <input
+                        data-tooltip="Check to compare this session with an other one"
+                        type="checkbox"
+                        checked={sessionToCompareIds().includes(props.session.id)}
+                        disabled={disableBtns()}
+                        onChange={(e) => {
+                            updateSessionToCompare(props.session, e.currentTarget.checked)
+                        }}/>
+
+
+                    <b>{sessinLabel}</b>
+                    <div> {props.session.datas.length} events</div>
+
+                </div>
                 <div class={styles.BtnsBloc}>
                     <Show
                         when={props.session.id !== sessionToShow()}
@@ -128,7 +134,7 @@ const SessionView: Component<SessionViewProps> = (props) => {
                             <span classList={{
                                 "material-icons": true,
                                 [styles.Red]: true,
-                            }}>delete</span>
+                            }}>delete_outline</span>
                         </button>
                     </Show>
                 </div>
