@@ -3,6 +3,7 @@ import {Component, createSignal, For, Show} from "solid-js";
 import styles from "../App.module.css";
 import {collapsedDiffs, comparisonNum, setCollapsedDiffs, setComparisonNum} from "../state";
 import {DiffView} from "./DiffView";
+import {TROW_ID_PREFIX} from "../constants";
 
 export interface DiffLineViewProps {
     diffs: DataPartDiff[],
@@ -70,6 +71,7 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
                                     [styles.Clickable]: true,
                                 }}
                                 onClick={() => {
+                                    location.hash = `#${TROW_ID_PREFIX}${props.num}`
                                     setCollapsedDiffs([])
                                     setComparisonNum(props.num)
                                 }}

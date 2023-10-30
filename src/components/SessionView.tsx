@@ -46,6 +46,9 @@ const SessionView: Component<SessionViewProps> = (props) => {
             }}>
                 <div class={styles.SessionTitle}>
                     <input
+                        classList={{
+                            [styles.Disabled]: disableBtns(),
+                        }}
                         data-tooltip="Check to compare this session with an other one"
                         type="checkbox"
                         checked={sessionToCompareIds().includes(props.session.id)}

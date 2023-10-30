@@ -6,3 +6,5 @@ export const URL: string = 'http://localhost:8080/api/v1/datas'
 export const SLASH: string = '/'
 
 export const SPACE_REPLACER: string = '#_#'
+
+export const TROW_ID_PREFIX: string = 'trow-'

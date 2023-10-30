@@ -4,6 +4,7 @@ import styles from "../App.module.css";
 import {TableRowData} from "../data";
 import {partDiffsOf} from "../utils";
 import {DiffsView} from "./DiffsView";
+import {TROW_ID_PREFIX} from "../constants";
 
 export const SessionCompareView: Component = () => {
 
@@ -60,7 +61,7 @@ export const SessionCompareView: Component = () => {
     }
 
     return (
-        <>
+        <div class={styles.SessionCompare}>
             <div class={styles.Title}>
                 <h2> SESSIONS COMPARISON </h2>
             </div>
@@ -70,6 +71,7 @@ export const SessionCompareView: Component = () => {
                 classList={{
                     [styles.IconBtn]: true,
                     [styles.Clickable]: true,
+                    [styles.ClearComparisonButton]: true,
                 }} onClick={stopComparison}>
                      <span classList={{
                          "material-icons": true,
@@ -91,7 +93,7 @@ export const SessionCompareView: Component = () => {
                         (rowData) =>
                             (
                                 <>
-                                    <tr>
+                                    <tr id={TROW_ID_PREFIX + rowData.num}>
                                         <For each={rowData.datas}>
                                             {
                                                 (data) =>
@@ -119,6 +121,6 @@ export const SessionCompareView: Component = () => {
 
             </table>
 
-        </>
+        </div>
     )
 }
