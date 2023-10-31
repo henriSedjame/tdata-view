@@ -11,6 +11,7 @@ import {
 import SessionView from "./SessionView";
 import styles from "../App.module.css";
 import Separator from "./Separator";
+import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 export const SessionList : Component = () => {
 
@@ -36,10 +37,9 @@ export const SessionList : Component = () => {
             </For>
 
             <Show when={canCompare() && !isComparing()}>
+                <WithTooltip tooltip="Compare selected sessions" position={TooltipPosition.BOTTOM}>
                 <div
-                    data-tooltip="Compare selected sessions"
                     classList={{
-
                         [styles.Clickable]: true,
                         [styles.CompareLabel]: true,
                     }} onClick={startComparison}>
@@ -52,6 +52,7 @@ export const SessionList : Component = () => {
                      }}>compare_arrows</span>
                     <div> {sessionsToCompare().second?.name ?? sessionsToCompare().second?.id}</div>
                 </div>
+                </WithTooltip>
             </Show>
         </>
     )

@@ -434,3 +434,47 @@
 .Revert {
     rotate: 180deg;
 }
+
+.WithTooltip {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    > div:nth-child(1) {
+        width: 100%;
+    }
+}
+
+.Tooltip {
+    position: absolute;
+    min-width: 150px;
+    text-align: center;
+    background-color: #070707;
+    padding: 3px;
+    border-radius: 3px;
+    color: white;
+    font-size: 14px;
+    max-lines: 1;
+    text-wrap: none;
+    z-index: 1;
+
+    &.Disabled {
+        opacity: 0.5;
+    }
+
+    &.Top {
+        bottom: 100%;
+    }
+
+    &.Bottom {
+        top: 100%;
+    }
+
+    &.Right {
+        left: 100%;
+    }
+
+    &.Left {
+        right: 100%;
+    }
+}

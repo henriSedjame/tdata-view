@@ -12,6 +12,7 @@ import {
 import {DiffView} from "./DiffView";
 import {TROW_ID_PREFIX} from "../constants";
 import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../utils";
+import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 export interface DiffsViewProps {
     diffs: DataPartDiff[],
@@ -86,8 +87,8 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                     <Show
                         when={props.num == comparisonNum()}
                         fallback={
+                            <WithTooltip tooltip="Show differences" position={TooltipPosition.TOP}>
                             <button
-                                data-tooltip="Show differences"
                                 classList={{
                                     [styles.IconBtn]: true,
                                     [styles.Clickable]: true,
@@ -103,10 +104,12 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                                 [styles.White]: true,
                             }}>keyboard_arrow_down</span>
                             </button>
+                            </WithTooltip>
                         }
                     >
+                        <WithTooltip tooltip="Hide differences" position={TooltipPosition.BOTTOM}>
                         <button
-                            data-tooltip="Hide differences"
+
                             classList={{
                                 [styles.IconBtn]: true,
                                 [styles.Clickable]: true,
@@ -121,14 +124,15 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             [styles.White]: true,
                         }}>keyboard_arrow_up</span>
                         </button>
+                        </WithTooltip>
                     </Show>
                 </div>
 
                 <Show when={props.num == comparisonNum()}>
                     <div class={styles.ExpandBtnsBloc}>
                         <div>
+                            <WithTooltip tooltip="Show ADDED only" position={TooltipPosition.LEFT}>
                             <button
-                                data-tooltip="Show ADDED only"
                                 classList={{
                                     "tooltip-left": true,
                                     [styles.IconBtn]: true,
@@ -140,14 +144,15 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             [styles.Green]: true,
                         }}>arrow_right_alt</span>
                             </button>
+                            </WithTooltip>
 
                             <div classList={{
                                 [styles.BtnSeparator]: true,
                                 [styles.BlackSep]: true,
                             }}></div>
 
+                            <WithTooltip tooltip="Show CHANGED only" position={TooltipPosition.TOP}>
                             <button
-                                data-tooltip="Show CHANGED only"
                                 classList={{
                                     "tooltip-left": true,
                                     [styles.IconBtn]: true,
@@ -159,12 +164,14 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             [styles.LightGrey]: true,
                         }}>compare_arrows</span>
                             </button>
+                            </WithTooltip>
                             <div classList={{
                                 [styles.BtnSeparator]: true,
                                 [styles.BlackSep]: true,
                             }}></div>
+
+                            <WithTooltip tooltip="Show REMOVED only" position={TooltipPosition.RIGHT}>
                             <button
-                                data-tooltip="Show REMOVED only"
                                 classList={{
                                     "tooltip-left": true,
                                     [styles.IconBtn]: true,
@@ -177,10 +184,11 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             [styles.Revert]: true,
                         }}>arrow_right_alt</span>
                             </button>
+                            </WithTooltip>
                         </div>
                         <div>
+                            <WithTooltip tooltip="Expand All" position={TooltipPosition.LEFT}>
                             <button
-                                data-tooltip="Expand All"
                                 classList={{
                                     "tooltip-left": true,
                                     [styles.IconBtn]: true,
@@ -192,14 +200,14 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             [styles.Black]: true,
                         }}>unfold_more</span>
                             </button>
-
+                            </WithTooltip>
                             <div classList={{
                                 [styles.BtnSeparator]: true,
                                 [styles.BlackSep]: true,
                             }}></div>
 
+                            <WithTooltip tooltip="Collapse All" position={TooltipPosition.RIGHT}>
                             <button
-                                data-tooltip="Collapse All"
                                 classList={{
                                     "tooltip-left": true,
                                     [styles.IconBtn]: true,
@@ -212,6 +220,7 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
 
                         }}>unfold_less</span>
                             </button>
+                            </WithTooltip>
                         </div>
                     </div>
                     <For each={expandedDiffs}>

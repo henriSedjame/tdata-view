@@ -13,6 +13,7 @@ import {
 import {Session} from "../data";
 import {resetSession, sessionStorageName, updateSessionToCompare} from "../services";
 import {SessionDataView} from "./SessionDataView";
+import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 export interface SessionViewProps {
     session: Session
@@ -45,18 +46,20 @@ const SessionView: Component<SessionViewProps> = (props) => {
                 [styles.Shadow]: isSelected(),
             }}>
                 <div class={styles.SessionTitle}>
-                    <input
-                        classList={{
-                            [styles.Disabled]: disableBtns(),
-                        }}
-                        data-tooltip="Check to compare this session with an other one"
-                        type="checkbox"
-                        checked={sessionToCompareIds().includes(props.session.id)}
-                        disabled={disableBtns()}
-                        onChange={(e) => {
-                            updateSessionToCompare(props.session, e.currentTarget.checked)
-                        }}/>
+                    <WithTooltip tooltip="Check to compare this session with an other one" disabled={disableBtns()}
+                                 position={TooltipPosition.RIGHT}>
+                        <input
+                            classList={{
+                                [styles.Disabled]: disableBtns(),
+                            }}
 
+                            type="checkbox"
+                            checked={sessionToCompareIds().includes(props.session.id)}
+                            disabled={disableBtns()}
+                            onChange={(e) => {
+                                updateSessionToCompare(props.session, e.currentTarget.checked)
+                            }}/>
+                    </WithTooltip>
 
                     <b>{sessinLabel}</b>
                     <div> {props.session.datas.length} events</div>
@@ -66,8 +69,31 @@ const SessionView: Component<SessionViewProps> = (props) => {
                     <Show
                         when={props.session.id !== sessionToShow()}
                         fallback={
+                            <WithTooltip tooltip="Hide the events list"
+                                         disabled={disableBtns()} position={TooltipPosition.BOTTOM}>
+                                <button
+                                    classList={{
+                                        [styles.IconBtn]: true,
+                                        [styles.Clickable]: !disableBtns(),
+                                        [styles.Disabled]: disableBtns(),
+                                    }}
+                                    disabled={disableBtns()}
+                                    onClick={() => {
+                                        setCollapsed([])
+                                        setSessionToShow(null)
+                                    }}
+                                >
+                                <span classList={{
+                                    "material-icons": true,
+                                    [styles.Green]: true,
+                                }}>keyboard_arrow_up</span>
+                                </button>
+                            </WithTooltip>
+                        }
+                    >
+                        <WithTooltip tooltip="Show the events list"
+                                     disabled={disableBtns()} position={TooltipPosition.TOP}>
                             <button
-                                data-tooltip="Hide the events list"
                                 classList={{
                                     [styles.IconBtn]: true,
                                     [styles.Clickable]: !disableBtns(),
@@ -76,57 +102,41 @@ const SessionView: Component<SessionViewProps> = (props) => {
                                 disabled={disableBtns()}
                                 onClick={() => {
                                     setCollapsed([])
-                                    setSessionToShow(null)
-                                }}
-                            >
-                                <span classList={{
-                                    "material-icons": true,
-                                    [styles.Green]: true,
-                                }}>keyboard_arrow_up</span>
+                                    setSessionToShow(props.session.id)
+                                }}><span classList={{
+                                "material-icons": true,
+                                [styles.Green]: true,
+                            }}>keyboard_arrow_down</span>
                             </button>
-                        }
-                    >
+                        </WithTooltip>
+                    </Show>
+
+                    <div class={styles.BtnSeparator}></div>
+
+                    <WithTooltip tooltip="Reset the session"
+                                 disabled={disableBtns()} position={TooltipPosition.TOP}>
                         <button
-                            data-tooltip="Show the events list"
                             classList={{
                                 [styles.IconBtn]: true,
                                 [styles.Clickable]: !disableBtns(),
                                 [styles.Disabled]: disableBtns(),
                             }}
                             disabled={disableBtns()}
-                            onClick={() => {
-                                setCollapsed([])
-                                setSessionToShow(props.session.id)
-                            }}><span classList={{
-                            "material-icons": true,
-                            [styles.Green]: true,
-                        }}>keyboard_arrow_down</span>
-                        </button>
-                    </Show>
-
-                    <div class={styles.BtnSeparator}></div>
-
-                    <button
-                        data-tooltip="Reset the session"
-                        classList={{
-                            [styles.IconBtn]: true,
-                            [styles.Clickable]: !disableBtns(),
-                            [styles.Disabled]: disableBtns(),
-                        }}
-                        disabled={disableBtns()}
-                        onClick={() => resetSession(props.session.id, props.session.name)}>
+                            onClick={() => resetSession(props.session.id, props.session.name)}>
                         <span classList={{
                             "material-icons": true,
                             [styles.Orange]: true,
                         }}>replay</span>
-                    </button>
+                        </button>
+                    </WithTooltip>
 
                     <div class={styles.BtnSeparator}></div>
 
                     <Show when={props.session.id !== currentSessionId()}
                           fallback={(<div class={styles.EmptyText}>____</div>)}>
+                        <WithTooltip tooltip="Delete the session"
+                                     disabled={disableBtns()} position={TooltipPosition.TOP}>
                         <button
-                            data-tooltip="Delete the session"
                             classList={{
                                 [styles.IconBtn]: true,
                                 [styles.Clickable]: !disableBtns() && props.session.id !== sessionToShow(),
@@ -139,6 +149,7 @@ const SessionView: Component<SessionViewProps> = (props) => {
                                 [styles.Red]: true,
                             }}>delete_outline</span>
                         </button>
+                        </WithTooltip>.
                     </Show>
                 </div>
 

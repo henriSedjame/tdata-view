@@ -3,6 +3,7 @@ import {Session} from "../data";
 import styles from "../App.module.css";
 import {schemaToShow, setCollapsed, setSchemaToShow} from "../state";
 import {DataView} from "./DataView";
+import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 export interface SessionDataViewProps {
     session: Session
@@ -25,39 +26,43 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                     <Show
                                         when={schemaToShow() !== `${data.id}_${data.timpstamp}`}
                                         fallback={
-                                            <button
-                                                data-tooltip="Hide the data structure"
-                                                classList={{
-                                                    [styles.IconBtn]: true,
-                                                    [styles.Clickable]: true,
-                                                }}
-                                                onClick={() => {
-                                                    setCollapsed([])
-                                                    setSchemaToShow(null)
-                                                }}
-                                            >
+                                            <WithTooltip tooltip="Hide the data structure"
+                                                         position={TooltipPosition.BOTTOM}>
+                                                <button
+                                                    classList={{
+                                                        [styles.IconBtn]: true,
+                                                        [styles.Clickable]: true,
+                                                    }}
+                                                    onClick={() => {
+                                                        setCollapsed([])
+                                                        setSchemaToShow(null)
+                                                    }}
+                                                >
                                                 <span classList={{
                                                     "material-icons": true,
                                                     [styles.Black]: true,
                                                 }}>keyboard_arrow_up</span>
-                                            </button>
+                                                </button>
+                                            </WithTooltip>
                                         }
                                     >
-                                        <button
-                                            data-tooltip="Show the data structure"
-                                            classList={{
-                                                [styles.IconBtn]: true,
-                                                [styles.Clickable]: true,
-                                            }}
-                                            onclick={() => {
-                                                setCollapsed([])
-                                                setSchemaToShow(`${data.id}_${data.timpstamp}`)
-                                            }}
-                                        >  <span classList={{
-                                            "material-icons": true,
-                                            [styles.Black]: true,
-                                        }}>keyboard_arrow_down</span>
-                                        </button>
+                                        <WithTooltip tooltip="Show the data structure"
+                                                     position={TooltipPosition.TOP}>
+                                            <button
+                                                classList={{
+                                                    [styles.IconBtn]: true,
+                                                    [styles.Clickable]: true,
+                                                }}
+                                                onclick={() => {
+                                                    setCollapsed([])
+                                                    setSchemaToShow(`${data.id}_${data.timpstamp}`)
+                                                }}
+                                            >  <span classList={{
+                                                "material-icons": true,
+                                                [styles.Black]: true,
+                                            }}>keyboard_arrow_down</span>
+                                            </button>
+                                        </WithTooltip>
                                     </Show>
                                 </div>
                                 <Show when={schemaToShow() === `${data.id}_${data.timpstamp}`}>

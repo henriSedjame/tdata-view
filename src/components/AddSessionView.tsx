@@ -1,4 +1,4 @@
-import {Component, createSignal, Show} from "solid-js";
+import {Component, Show} from "solid-js";
 import styles from "../App.module.css";
 import {
     currentSessionId,
@@ -11,6 +11,7 @@ import {
 } from "../state";
 import {CURRENT_SESSION_ID, LAST_TIMESTAMP} from "../constants";
 import {addNewSession} from "../services";
+import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 
 export const AddSessionView: Component = () => {
@@ -62,43 +63,44 @@ export const AddSessionView: Component = () => {
 
             <div class={styles.AddSessionBtnsBloc}>
 
-                <button
-                    data-tooltip="Start the session"
-
-                    disabled={disableStartBtn()}
-                    classList={{
-                        "tooltip-left": true,
-                        [styles.IconBtn]: true,
-                        [styles.Clickable]: !disableStartBtn(),
-                        [styles.Disabled]: disableStartBtn(),
-                    }}
-                    onClick={() => startSession()}>
+                <WithTooltip tooltip="Start a new session" disabled={disableStartBtn()}
+                             position={TooltipPosition.BOTTOM}>
+                    <button
+                        disabled={disableStartBtn()}
+                        classList={{
+                            "tooltip-left": true,
+                            [styles.IconBtn]: true,
+                            [styles.Clickable]: !disableStartBtn(),
+                            [styles.Disabled]: disableStartBtn(),
+                        }}
+                        onClick={() => startSession()}>
                         <span classList={{
                             "material-icons": true,
                             [styles.Green]: !disableStartBtn(),
                             [styles.Grey]: disableStartBtn(),
                             [styles.BigBtn]: true,
                         }}>play_circle_outline</span>
-                </button>
+                    </button>
+                </WithTooltip>
 
-
-                <button
-                    data-tooltip="Stop the session"
-                    disabled={disableStopBtn()}
-                    classList={{
-                        [styles.IconBtn]: true,
-                        [styles.Clickable]: !disableStopBtn(),
-                        [styles.Disabled]: disableStopBtn(),
-                    }}
-                    onClick={() => stopSession()}>
+                <WithTooltip tooltip="Stop the session" disabled={disableStopBtn()}
+                             position={TooltipPosition.BOTTOM}>
+                    <button
+                        disabled={disableStopBtn()}
+                        classList={{
+                            [styles.IconBtn]: true,
+                            [styles.Clickable]: !disableStopBtn(),
+                            [styles.Disabled]: disableStopBtn(),
+                        }}
+                        onClick={() => stopSession()}>
                         <span classList={{
                             "material-icons-outlined": true,
                             [styles.Red]: !disableStopBtn(),
                             [styles.Grey]: disableStopBtn(),
                             [styles.BigBtn]: true,
                         }}>stop_circle</span>
-                </button>
-
+                    </button>
+                </WithTooltip>
 
             </div>
 

@@ -66,6 +66,7 @@ export const SessionCompareView: Component = () => {
                 <h2> SESSIONS COMPARISON </h2>
             </div>
 
+
             <button
                 data-tooltip="Clear comparison"
                 classList={{
