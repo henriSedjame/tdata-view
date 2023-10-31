@@ -45,14 +45,12 @@ tr:nth-child(even) {
   content : attr(data-tooltip);
   background : #070707;
   padding: 5px;
-  margin-left: 40px;
-  margin-top: 20px;
+  margin: auto;
   border-radius: 5px;
   color: white;
   opacity : 0;
-
+  z-index: 1;
 }
-
 
 [data-tooltip]:hover::before {
   opacity : 1;

@@ -81,6 +81,10 @@
     color: #343434;
 }
 
+.Yellow {
+    color: #f5e906;
+}
+
 .LightGrey {
     color: #7a7a7a;
 }
@@ -383,17 +387,41 @@
     }
 }
 
+
+.DiffUnChanged {
+    position: absolute;
+    background-color: transparent;
+    opacity: 0.3;
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+    border: grey 1px solid;
+
+    &.DiffName {
+        background-color: dimgrey;
+        border: none;
+        margin-top: 8px;
+        height: 3px;
+    }
+}
+
 .ExpandBtnsBloc {
     background-color: rgba(178, 178, 178, 0.1);
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     margin: auto;
     width: calc(33% - (10px / 3));
     padding: 2px;
     border-bottom: white 1px solid;
 
+    > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+    }
 }
 
 
@@ -401,5 +429,8 @@
     position: fixed;
     left: 5px;
     bottom: 5px;
+}
 
+.Revert {
+    rotate: 180deg;
 }

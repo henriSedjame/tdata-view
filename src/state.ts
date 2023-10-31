@@ -1,5 +1,5 @@
 import {createResource, createSignal} from "solid-js";
-import {DataPartDiff, Session, SessionsToCompare} from "./data";
+import {DataPartDiff, Session, SessionsToCompare, ShowDiffType} from "./data";
 import {SESSION_PREFIX, SLASH, SPACE_REPLACER} from "./constants";
 import {getLastSessionId, initCurrentSessionId} from "./services";
 
@@ -53,3 +53,5 @@ export const [sessions, {mutate, refetch}] = createResource(() => {
 });
 
 export const [collapsedDiffs, setCollapsedDiffs] = createSignal<string[] >([])
+
+export const [showDiffType, setShowDiffType] = createSignal<ShowDiffType>(ShowDiffType.ALL)

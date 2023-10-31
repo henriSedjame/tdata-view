@@ -68,6 +68,13 @@ export function partDiffsOf(o1: any, o2: any): DataPartDiff[] {
                     prev: part1.value,
                     next: part2.value
                 })
+            } else {
+                diffs.push({
+                    name: name,
+                    diffType: DiffType.UNCHANGED,
+                    prev: part1.value,
+                    next: part2.value
+                })
             }
         } else if (!part1) {
             diffs.push({
@@ -104,6 +111,26 @@ export function flatParts(part: DataPart, parent?: string): PartValue[] {
             }
         ]
     }
+}
+
+
+export function hasValue(part: DataPartDiff): boolean {
+    return part.next !== undefined || part.prev !== undefined;
+}
+
+export function isParentOf(part: DataPartDiff, other: DataPartDiff): boolean {
+    return other.name.startsWith(part.name);
+}
+
+export function isCollapsable(diff: DataPartDiff) : boolean {
+    return diff.name.split(".").length > 1 || !hasValue(diff);
+}
+
+export function isUnchanged(diff: DataPartDiff) : boolean {
+    return diff.diffType === DiffType.UNCHANGED;
+}
+export function last(name: string) {
+    return name.split(".").pop();
 }
 
 export function isObject(o: any) {

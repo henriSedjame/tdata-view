@@ -1,24 +1,32 @@
-import {DataPartDiff, DiffType} from "../data";
-import {Component, createSignal, For, Show} from "solid-js";
+import {DataPartDiff, ShowDiffType} from "../data";
+import {Component, For, Show} from "solid-js";
 import styles from "../App.module.css";
-import {collapsedDiffs, comparisonNum, setCollapsedDiffs, setComparisonNum} from "../state";
+import {
+    collapsedDiffs,
+    comparisonNum,
+    setCollapsedDiffs,
+    setComparisonNum,
+    setShowDiffType,
+    showDiffType
+} from "../state";
 import {DiffView} from "./DiffView";
 import {TROW_ID_PREFIX} from "../constants";
+import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../utils";
 
-export interface DiffLineViewProps {
+export interface DiffsViewProps {
     diffs: DataPartDiff[],
     num: number
 }
 
-export const DiffsView: Component<DiffLineViewProps> = (props) => {
+export const DiffsView: Component<DiffsViewProps> = (props) => {
 
-    let unchangedDiffs = props.diffs.filter(d => d.diffType !== DiffType.UNCHANGED);
+    let diffsLength = props.diffs.filter(d => !isUnchanged(d)).length;
 
-    const hasDiffs = unchangedDiffs.length > 0
+    const hasDiffs = diffsLength > 0
 
     const expandedDiffs: DataPartDiff[] = []
 
-    unchangedDiffs.forEach((diff) => {
+    props.diffs.forEach((diff) => {
         let fname = ""
 
         diff.name.split(".").forEach((namePart, index, ps) => {
@@ -28,13 +36,13 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
             const pref = "___".repeat(index)
 
             if (index === (ps.length - 1)) {
-                expandedDiffs.push({...diff, name: namePart, fullName: fname, prefix: pref})
+                expandedDiffs.push({...diff, name: fname, prefix: pref})
             } else {
-                if (expandedDiffs.find((d) => d.fullName === fname)) {
+                if (expandedDiffs.find((d) => d.name === fname)) {
                     return;
                 }
                 expandedDiffs.push({
-                    name: namePart, fullName: fname, prefix: pref, diffType: undefined, next: undefined, prev: undefined
+                    name: fname, prefix: pref, diffType: undefined, next: undefined, prev: undefined
                 })
             }
         })
@@ -45,22 +53,36 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
     }
 
     const collapseAll = () => {
-        setCollapsedDiffs(expandedDiffs.filter(d => d.fullName!.split(".").length > 1 || (d.prev === undefined && d.next === undefined)).map(d => d.fullName!))
+        setCollapsedDiffs(expandedDiffs.filter(isCollapsable).map(d => d.name))
     }
 
+
+    const showAdded = () => show(ShowDiffType.ADDED)
+    const showRemoved = () => show(ShowDiffType.REMOVED)
+    const showChanged = () => show(ShowDiffType.CHANGED)
+
+
+
+    const show = (ty: ShowDiffType) => {
+        if (showDiffType() === ty) {
+            setShowDiffType(ShowDiffType.ALL)
+        } else {
+            setShowDiffType(ty)
+        }
+    }
     return (
         <Show when={hasDiffs}
-            fallback={
-                <div class={styles.DiffHead}>
-                    <b classList={{
-                        [styles.Green]: true,
-                    }}> Events are identical </b>
-                </div>
-            }
+              fallback={
+                  <div class={styles.DiffHead}>
+                      <b classList={{
+                          [styles.Green]: true,
+                      }}> Events are identical </b>
+                  </div>
+              }
         >
             <div class={styles.Diff}>
                 <div class={styles.DiffHead}>
-                    <span class={styles.TextInfo}> {unchangedDiffs.length} differences found </span>
+                    <span class={styles.TextInfo}> {diffsLength} differences found </span>
                     <Show
                         when={props.num == comparisonNum()}
                         fallback={
@@ -104,51 +126,105 @@ export const DiffsView: Component<DiffLineViewProps> = (props) => {
 
                 <Show when={props.num == comparisonNum()}>
                     <div class={styles.ExpandBtnsBloc}>
-                        <button
-                            data-tooltip="Expand All"
-                            classList={{
-                                "tooltip-left": true,
-                                [styles.IconBtn]: true,
-                                [styles.Clickable]: true,
-                            }}
-                            onClick={expandAll}>
+                        <div>
+                            <button
+                                data-tooltip="Show ADDED only"
+                                classList={{
+                                    "tooltip-left": true,
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={showAdded}>
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.Green]: true,
+                        }}>arrow_right_alt</span>
+                            </button>
+
+                            <div classList={{
+                                [styles.BtnSeparator]: true,
+                                [styles.BlackSep]: true,
+                            }}></div>
+
+                            <button
+                                data-tooltip="Show CHANGED only"
+                                classList={{
+                                    "tooltip-left": true,
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={showChanged}>
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.LightGrey]: true,
+                        }}>compare_arrows</span>
+                            </button>
+                            <div classList={{
+                                [styles.BtnSeparator]: true,
+                                [styles.BlackSep]: true,
+                            }}></div>
+                            <button
+                                data-tooltip="Show REMOVED only"
+                                classList={{
+                                    "tooltip-left": true,
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={showRemoved}>
+                        <span classList={{
+                            "material-icons": true,
+                            [styles.Red]: true,
+                            [styles.Revert]: true,
+                        }}>arrow_right_alt</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                data-tooltip="Expand All"
+                                classList={{
+                                    "tooltip-left": true,
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={expandAll}>
                         <span classList={{
                             "material-icons": true,
                             [styles.Black]: true,
                         }}>unfold_more</span>
-                        </button>
+                            </button>
 
-                        <div classList={{
-                            [styles.BtnSeparator]: true,
-                            [styles.BlackSep]: true,
-                        }}></div>
+                            <div classList={{
+                                [styles.BtnSeparator]: true,
+                                [styles.BlackSep]: true,
+                            }}></div>
 
-                        <button
-                            data-tooltip="Collapse All"
-                            classList={{
-                                "tooltip-left": true,
-                                [styles.IconBtn]: true,
-                                [styles.Clickable]: true,
-                            }}
-                            onClick={collapseAll}>
+                            <button
+                                data-tooltip="Collapse All"
+                                classList={{
+                                    "tooltip-left": true,
+                                    [styles.IconBtn]: true,
+                                    [styles.Clickable]: true,
+                                }}
+                                onClick={collapseAll}>
                         <span classList={{
                             "material-icons": true,
                             [styles.Black]: true,
 
                         }}>unfold_less</span>
-                        </button>
-
+                            </button>
+                        </div>
                     </div>
                     <For each={expandedDiffs}>
                         {
                             (partDiff) =>
                                 (
                                     <DiffView diff={partDiff}
-                                              numberOfChilds={expandedDiffs.filter(d => d.fullName!.startsWith(partDiff.fullName!) && (d.next || d.prev)).length}
+                                              numberOfChilds={expandedDiffs.filter(d => isParentOf(partDiff, d) && hasValue(d) && !isUnchanged(d)).length}
                                               onExpand={
-                                                  (name) => {
-                                                      let dataPartDiffs = expandedDiffs.filter(d => d.fullName!.startsWith(name)).map(d => d.fullName!);
-                                                      if (collapsedDiffs().includes(name)) {
+                                                  () => {
+                                                      let dataPartDiffs = expandedDiffs.filter(d => isParentOf(partDiff, d)).map(d => d.name);
+
+                                                      if (collapsedDiffs().includes(partDiff.name)) {
                                                           setCollapsedDiffs(
                                                               collapsedDiffs().filter(d => !dataPartDiffs.includes(d))
                                                           )

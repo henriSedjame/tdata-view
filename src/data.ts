@@ -37,7 +37,6 @@ export enum DiffType{
 
 export interface DataPartDiff{
     name: string;
-    fullName?: string;
     prefix?: string;
     diffType: DiffType | undefined;
     prev: any | undefined;
@@ -52,4 +51,13 @@ export interface PartValue{
 export interface SessionsToCompare{
     first: Session | null ,
     second: Session | null
+}
+
+
+export enum ShowDiffType {
+    ALL = 'ALL',
+    CHANGED = 'CHANGED',
+    UNCHANGED = 'UNCHANGED',
+    ADDED = 'ADDED',
+    REMOVED = 'REMOVED'
 }
