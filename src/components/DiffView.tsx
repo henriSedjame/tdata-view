@@ -2,7 +2,7 @@ import {Component, Show} from "solid-js";
 import {DataPartDiff, DiffType, ShowDiffType} from "../data";
 import styles from "../App.module.css";
 import {collapsedDiffs, showDiffType} from "../state";
-import {hasValue, isUnchanged, last} from "../utils";
+import {hasValue, isUnchanged, last, short, tooltip} from "../utils";
 
 export interface DiffViewProps {
     diff: DataPartDiff;
@@ -63,8 +63,8 @@ export const DiffView: Component<DiffViewProps> = (props) => {
 
                     }}></div>
 
-                    <div data-tooltip={props.diff.prev?.toString()?.length > 30 ? props.diff.prev : undefined}>
-                        <p class={styles.DiffValue}>{props.diff.prev?.toString()?.substring(0, 30)}</p>
+                    <div data-tooltip={ tooltip(props.diff.prev?.toString())}>
+                        <p class={styles.DiffValue}>{short(props.diff.prev?.toString())}</p>
                     </div>
 
                 </div>
@@ -104,8 +104,8 @@ export const DiffView: Component<DiffViewProps> = (props) => {
                             [styles.DiffOther]: props.diff.next === undefined,
                         }}
                     ></div>
-                    <div data-tooltip={props.diff.next?.toString()?.length > 30 ? props.diff.prev : undefined}>
-                        {props.diff.next?.toString()?.substring(0, 30)} </div>
+                    <div data-tooltip={ tooltip(props.diff.next?.toString())}>
+                        { short(props.diff.next?.toString())} </div>
                 </div>
 
             </div>

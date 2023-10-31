@@ -133,6 +133,16 @@ export function last(name: string) {
     return name.split(".").pop();
 }
 
+
+export function short(s: string = '') {
+    if (s.length > 30) return s.substring(0, 30) + "...";
+    return s
+}
+
+export function tooltip(s: string | undefined = '') {
+    if (s.length > 30) return s;
+    return undefined
+}
 export function isObject(o: any) {
     return typeof o === 'object' && o !== null;
 }
