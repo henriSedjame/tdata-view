@@ -1,9 +1,9 @@
-import {Component, createSignal, For, Show} from "solid-js";
-import {DataPart} from "../data";
-import {isObject} from "../utils";
+import {Component,  For, Show} from "solid-js";
+import {DataPart} from "../models/data-part";
+import {isObject} from "../logics/utils";
 import styles from "../App.module.css";
-import {collapse} from "../services";
-import {collapsed} from "../state";
+import {collapse} from "../logics/services";
+import {collapsed} from "../models/state";
 
 export interface DataPartViewProps {
     part: DataPart,

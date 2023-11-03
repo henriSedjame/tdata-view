@@ -1,8 +1,9 @@
 import {Component, For} from "solid-js";
-import {DataPart, SessionData} from "../data";
-import {partsOf} from "../utils";
+import {DataPart} from "../models/data-part";
+import {partsOf} from "../logics/utils";
 import {DataPartView} from "./DataPartView";
 import styles from "../App.module.css";
+import {SessionData} from "../models/session";
 
 export interface DataViewProps {
     data: SessionData

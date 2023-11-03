@@ -1,4 +1,5 @@
-import {DataPart, DataPartDiff, DiffType, PartValue} from "./data";
+import {DataPart, PartValue} from "../models/data-part";
+import {DataPartDiff, DiffType} from "../models/diff";
 
 export function partsOf(o: any): DataPart[] {
 
@@ -113,7 +114,6 @@ export function flatParts(part: DataPart, parent?: string): PartValue[] {
     }
 }
 
-
 export function hasValue(part: DataPartDiff): boolean {
     return part.next !== undefined || part.prev !== undefined;
 }
@@ -122,17 +122,17 @@ export function isParentOf(part: DataPartDiff, other: DataPartDiff): boolean {
     return other.name.startsWith(part.name);
 }
 
-export function isCollapsable(diff: DataPartDiff) : boolean {
+export function isCollapsable(diff: DataPartDiff): boolean {
     return diff.name.split(".").length > 1 || !hasValue(diff);
 }
 
-export function isUnchanged(diff: DataPartDiff) : boolean {
+export function isUnchanged(diff: DataPartDiff): boolean {
     return diff.diffType === DiffType.UNCHANGED;
 }
+
 export function last(name: string) {
     return name.split(".").pop();
 }
-
 
 export function short(s: string = '') {
     if (s.length > 30) return s.substring(0, 30) + "...";
@@ -143,6 +143,7 @@ export function tooltip(s: string | undefined = '') {
     if (s.length > 30) return s;
     return undefined
 }
+
 export function isObject(o: any) {
     return typeof o === 'object' && o !== null;
 }

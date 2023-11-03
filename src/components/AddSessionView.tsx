@@ -8,9 +8,9 @@ import {
     setCurrentSessionId,
     setLastSessionId,
     setSessionName
-} from "../state";
-import {CURRENT_SESSION_ID, LAST_TIMESTAMP} from "../constants";
-import {addNewSession} from "../services";
+} from "../models/state";
+import {CURRENT_SESSION_ID, LAST_TIMESTAMP} from "../models/constants";
+import {addNewSession} from "../logics/services";
 import {TooltipPosition, WithTooltip} from "./WithTooltip";
 
 
@@ -58,12 +58,16 @@ export const AddSessionView: Component = () => {
 
                 </div>
             }>
-                <h2 class={styles.DarkGrey}> {sessionName()} </h2>
+                <div class={styles.SessionName} >
+                    <div> CURRENT SESSION</div>
+                    <h2 class={styles.Grey}> {sessionName()} </h2>
+                </div>
+
             </Show>
 
             <div class={styles.AddSessionBtnsBloc}>
 
-                <WithTooltip tooltip="Start a new session" disabled={disableStartBtn()}
+            <WithTooltip tooltip="Start a new session" disabled={disableStartBtn()}
                              position={TooltipPosition.BOTTOM}>
                     <button
                         disabled={disableStartBtn()}

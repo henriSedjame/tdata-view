@@ -1,10 +1,10 @@
 import {Component, For, Show} from "solid-js";
-import {sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../state";
+import {sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../models/state";
 import styles from "../App.module.css";
-import {TableRowData} from "../data";
-import {partDiffsOf} from "../utils";
+import {TableRowData} from "../models/view";
+import {partDiffsOf} from "../logics/utils";
 import {DiffsView} from "./DiffsView";
-import {TROW_ID_PREFIX} from "../constants";
+import {TROW_ID_PREFIX} from "../models/constants";
 
 export const SessionCompareView: Component = () => {
 
@@ -65,7 +65,6 @@ export const SessionCompareView: Component = () => {
             <div class={styles.Title}>
                 <h2> SESSIONS COMPARISON </h2>
             </div>
-
 
             <button
                 data-tooltip="Clear comparison"

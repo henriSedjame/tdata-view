@@ -371,7 +371,6 @@
     }
 }
 
-
 .DiffChanged {
     position: absolute;
     background-color: #f5e906;
@@ -423,7 +422,6 @@
         align-items: center;
     }
 }
-
 
 .ClearComparisonButton {
     position: fixed;
@@ -477,4 +475,37 @@
     &.Left {
         right: 100%;
     }
+}
+
+.SessionName {
+    position: relative;
+
+    > div {
+        position: absolute;
+        padding: 1px;
+        top: -8px;
+        right: 50%;
+        font-size: 13px;
+        color: grey;
+        background-color: rgb(80, 80, 80);
+        opacity: 1;
+
+    ;
+    }
+
+    >h2 {
+        margin: 10px auto;
+        padding: 10px 0;
+        border-radius: 15px;
+        border: 1px  rgba(128, 128, 128, 0.31) solid;
+        width: 60%;
+    }
+}
+
+.Changed {
+    background-color: rgba(0, 0, 255, 0.7);
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: white;
 }

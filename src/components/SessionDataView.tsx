@@ -1,7 +1,7 @@
 import {Component, For, Show} from "solid-js";
-import {Session} from "../data";
+import {Session} from "../models/session";
 import styles from "../App.module.css";
-import {schemaToShow, setCollapsed, setSchemaToShow} from "../state";
+import {schemaToShow, setCollapsed, setSchemaToShow} from "../models/state";
 import {DataView} from "./DataView";
 import {TooltipPosition, WithTooltip} from "./WithTooltip";
 

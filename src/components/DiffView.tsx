@@ -1,8 +1,11 @@
 import {Component, Show} from "solid-js";
-import {DataPartDiff, DiffType, ShowDiffType} from "../data";
+import {ShowDiffType} from "../models/view";
 import styles from "../App.module.css";
-import {collapsedDiffs, showDiffType} from "../state";
-import {hasValue, isUnchanged, last, short, tooltip} from "../utils";
+import {collapsedDiffs, showDiffType} from "../models/state";
+import {hasValue, isUnchanged, last, short, tooltip} from "../logics/utils";
+import {DataPartDiff, DiffType} from "../models/diff";
+import {compare} from "../logics/utils/str-diff-utils";
+import {StrPartDiffView} from "./StrPartDiffView";
 
 export interface DiffViewProps {
     diff: DataPartDiff;
@@ -11,7 +14,6 @@ export interface DiffViewProps {
 }
 
 export const DiffView: Component<DiffViewProps> = (props) => {
-
 
     const expanded = () => {
         return !collapsedDiffs().includes(props.diff.name)
@@ -46,6 +48,13 @@ export const DiffView: Component<DiffViewProps> = (props) => {
                 return !hasValue(props.diff) && props.numberOfChilds > 0;
         }
     }
+
+    const isUnchangedDiff = () => {
+        return props.diff.diffType === DiffType.UNCHANGED || (props.diff.next === undefined || props.diff.prev === undefined)
+    }
+
+    let compareResult = compare(props.diff.prev?.toString(), props.diff.next?.toString())
+
     return (
         <Show when={isVisible() && shouldShow()}>
 
@@ -64,7 +73,11 @@ export const DiffView: Component<DiffViewProps> = (props) => {
                     }}></div>
 
                     <div data-tooltip={ tooltip(props.diff.prev?.toString())}>
-                        <p class={styles.DiffValue}>{short(props.diff.prev?.toString())}</p>
+                        <Show when={isUnchangedDiff()}
+                              fallback={<StrPartDiffView diffs={compareResult.prev} />}
+                        >
+                            <p class={styles.DiffValue}>{short(props.diff.prev?.toString())}</p>
+                        </Show>
                     </div>
 
                 </div>
@@ -105,7 +118,9 @@ export const DiffView: Component<DiffViewProps> = (props) => {
                         }}
                     ></div>
                     <div data-tooltip={ tooltip(props.diff.next?.toString())}>
-                        { short(props.diff.next?.toString())} </div>
+                        { short(props.diff.next?.toString())}
+
+                    </div>
                 </div>
 
             </div>

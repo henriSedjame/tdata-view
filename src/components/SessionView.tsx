@@ -1,6 +1,5 @@
 import {Component, Show} from "solid-js";
 import styles from "../App.module.css";
-import {SESSION_PREFIX} from "../constants";
 import {
     currentSessionId,
     isComparing,
@@ -9,9 +8,9 @@ import {
     sessionToCompareIds, sessionToShow, setCollapsed,
     setLastSessionId,
     setSessionToShow
-} from "../state";
-import {Session} from "../data";
-import {resetSession, sessionStorageName, updateSessionToCompare} from "../services";
+} from "../models/state";
+import {Session} from "../models/session";
+import {resetSession, sessionStorageName, updateSessionToCompare} from "../logics/services";
 import {SessionDataView} from "./SessionDataView";
 import {TooltipPosition, WithTooltip} from "./WithTooltip";
 

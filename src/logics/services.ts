@@ -1,13 +1,13 @@
 import {fetchEventSource} from "@microsoft/fetch-event-source";
-import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, SLASH, SPACE_REPLACER, URL} from "./constants";
+import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, SLASH, SPACE_REPLACER, URL} from "../models/constants";
 import {
     collapsed,
     currentSessionId,
     refetch, sessionName,
     sessionsToCompare, setCollapsed, setCurrentSessionId, setSessionName,
     setSessionsToCompare, setSessionToShow
-} from "./state";
-import {Session, SessionData} from "./data";
+} from "../models/state";
+import {Session, SessionData} from "../models/session";
 
 export function resetSession(id: number, sessionName: string) {
     setCollapsed([])

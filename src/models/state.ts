@@ -1,7 +1,8 @@
 import {createResource, createSignal} from "solid-js";
-import {DataPartDiff, Session, SessionsToCompare, ShowDiffType} from "./data";
+import {SessionsToCompare, ShowDiffType} from "./view";
 import {SESSION_PREFIX, SLASH, SPACE_REPLACER} from "./constants";
-import {getLastSessionId, initCurrentSessionId} from "./services";
+import {getLastSessionId, initCurrentSessionId} from "../logics/services";
+import {Session} from "./session";
 
 export const [currentSessionId, setCurrentSessionId] = createSignal(initCurrentSessionId())
 

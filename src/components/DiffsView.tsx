@@ -1,4 +1,4 @@
-import {DataPartDiff, ShowDiffType} from "../data";
+import {ShowDiffType} from "../models/view";
 import {Component, For, Show} from "solid-js";
 import styles from "../App.module.css";
 import {
@@ -8,11 +8,12 @@ import {
     setComparisonNum,
     setShowDiffType,
     showDiffType
-} from "../state";
+} from "../models/state";
 import {DiffView} from "./DiffView";
-import {TROW_ID_PREFIX} from "../constants";
-import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../utils";
+import {TROW_ID_PREFIX} from "../models/constants";
+import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../logics/utils";
 import {TooltipPosition, WithTooltip} from "./WithTooltip";
+import {DataPartDiff} from "../models/diff";
 
 export interface DiffsViewProps {
     diffs: DataPartDiff[],

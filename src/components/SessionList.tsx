@@ -7,7 +7,7 @@ import {
     setIsComparing,
     setSessionsToCompare,
     setSessionToShow
-} from "../state";
+} from "../models/state";
 import SessionView from "./SessionView";
 import styles from "../App.module.css";
 import Separator from "./Separator";
