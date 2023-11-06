@@ -1,0 +1,130 @@
+
+
+.DiffBloc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    > div {
+        position: relative;
+        width: 33%;
+        height: 25px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        background-color: rgba(178, 178, 178, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > div {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            > p {
+                padding: 1px;
+                overflow: hidden;
+                white-space: normal;
+                max-lines: 1;
+                text-align: center;
+
+                &.DiffValue {
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+
+    }
+
+    > div:nth-child(even) {
+        background-color: rgba(178, 178, 178, 0.3);
+        justify-content: start;
+        font-weight: bolder;
+        font-size: 14px;
+
+        > div {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+        }
+
+        > div:nth-child(1) {
+            padding-left: 5px;
+        }
+    }
+}
+
+.DiffAdded {
+    position: absolute;
+    background-color: #03b003;
+    opacity: 0.3;
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+
+    &.DiffName {
+        background-color: rgba(0, 255, 0, 0.7);
+        margin-top: 8px;
+        height: 3px;
+    }
+
+    &.DiffOther {
+        background-color: grey;
+        height: 8px;
+    }
+}
+
+.DiffRemoved {
+    position: absolute;
+    background-color: #b00331;
+    opacity: 0.3;
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+
+    &.DiffName {
+        background-color: rgb(176, 3, 49);
+        margin-top: 8px;
+        height: 3px;
+    }
+
+    &.DiffOther {
+        background-color: grey;
+        height: 8px;
+    }
+}
+
+.DiffChanged {
+    position: absolute;
+    background-color: #f5e906;
+    opacity: 0.3;
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+
+    &.DiffName {
+        background-color: rgb(245, 233, 6);
+        margin-top: 8px;
+        height: 3px;
+    }
+}
+
+.DiffUnChanged {
+    position: absolute;
+    background-color: transparent;
+    opacity: 0.3;
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+    border: grey 1px solid;
+
+    &.DiffName {
+        background-color: dimgrey;
+        border: none;
+        margin-top: 8px;
+        height: 3px;
+    }
+}

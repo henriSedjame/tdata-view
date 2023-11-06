@@ -1,28 +1,25 @@
 import {Component, Show} from 'solid-js';
 import styles from './App.module.css';
 import {isComparing} from "./models/state";
-import {initLastTimestamp} from "./logics/services";
-import {SessionList} from "./components/SessionList";
-import {SessionCompareView} from "./components/SessionCompareView";
-import {AddSessionView} from "./components/AddSessionView";
-import {buildCompareParts, compare, fromStrCompareParts, toStrParts} from "./logics/utils/str-diff-utils";
-import {StrPartDiffView} from "./components/StrPartDiffView";
+import {fetchData, initLastTimestamp} from "./logics/services";
+import {SessionListView} from "./components/session/SessionList.view";
+import {SessionCompareView} from "./components/compare/SessionCompare.view";
+import {AddSessionView} from "./components/add-session/AddSession.view";
 
 
 const App: Component = () => {
 
     initLastTimestamp()
 
-    //fetchData().then(() => {});
+    fetchData().then(() => {});
 
     return (
         <div>
             <h1 class={styles.White}>DATA COMPARE VIEW</h1>
 
-
             <AddSessionView />
 
-            <SessionList />
+            <SessionListView />
 
             <Show when={isComparing()}>
                 <SessionCompareView />

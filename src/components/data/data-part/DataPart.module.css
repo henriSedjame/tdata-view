@@ -1,0 +1,15 @@
+.DataPartBloc {
+    margin-left: 25px;
+    padding-bottom: 3px;
+}
+
+.PartName {
+    font-weight: bolder;
+    font-size: 14px;
+}
+
+.PartValue {
+    font-style: italic;
+    font-size: 15px;
+    padding-left: 2px;
+}

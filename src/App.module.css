@@ -16,10 +16,15 @@
     background-color: transparent;
 }
 
-.CompareBtn {
-    margin-top: 15px;
-    background-color: orange;
-    border-radius: 15px;
+.Btn {
+    border: none;
+    background-color: black;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 10px 25px;
+    color: white;
+    cursor: pointer;
+    outline: none;
 }
 
 .BigBtn {
@@ -35,26 +40,6 @@
     height: 1px;
     background-color: #7a7a7a;
     margin: 30px auto;
-}
-
-.Session {
-    width: 70%;
-    align-items: center;
-    padding: 5px;
-    margin: 4px auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: rgba(178, 178, 178, 0.3);
-    border-bottom: grey 3px solid;
-    color: #2a2a2a;
-}
-
-.SessionTitle {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .Shadow {
@@ -101,107 +86,12 @@
     color: #ff9100;
 }
 
-.Diff {
-    margin: 15px;
-    padding: 5px;
-    background-color: #424d4a;
-}
-
-.DiffHead {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    color: white;
-}
-
-/*.DiffName {
-    width: 100%;
-    text-align: center;
-    background-color: white;
-    font-weight: bolder;
-    font-size: 14px;
-}
-*/
-.DiffRow {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: rgba(37, 33, 49, 0.4);
-
-    > div {
-        width: 100%;
-        padding: 5px;
-        border: white 1px solid;
-        border-bottom: lightgrey 5px solid;
-        text-align: center;
-    }
-}
 
 .TextInfo {
     font-style: italic;
     color: #ffffff;
 }
 
-.EventItem {
-    width: 40%;
-    margin: 2px auto;
-    padding: 5px;
-    background-color: rgba(178, 178, 178, 0.6);
-    border-radius: 5px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.DataView {
-    width: fit-content;
-    background-color: rgba(178, 178, 178, 0.9);
-    margin: 5px auto;
-    text-align: start;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    border-radius: 5px;
-}
-
-.DataPartBloc {
-    margin-left: 25px;
-    padding-bottom: 3px;
-
-}
-
-.DataPartChildBloc {
-    margin-left: 5px;
-}
-
-.PartName {
-    font-weight: bolder;
-    font-size: 14px;
-}
-
-.PartValue {
-    font-style: italic;
-    font-size: 15px;
-    padding-left: 2px;
-}
-
-.Collapse {
-    cursor: pointer;
-}
-
-.SessionNameInput {
-    height: 25px;
-    width: 80%;
-    padding: 7px;
-    border-radius: 5px;
-    font-size: 18px;
-    margin-top: 10px;
-}
 
 .BtnSeparator {
     width: 1px;
@@ -212,32 +102,6 @@
     &.BlackSep {
         background-color: #a1a1a1;
     }
-}
-
-.BtnsBloc {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.AddSession {
-    width: 30%;
-    background-color: rgba(178, 178, 178, 0.2);
-    border-radius: 5px;
-    margin: auto;
-    padding-top: 1px;
-    padding-bottom: 5px;
-}
-
-.AddSessionBtnsBloc {
-    width: max-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 10px auto;
-    padding-top: 2px;
-    background-color: rgba(255, 255, 255, 0.37);
-    border-radius: 25px;
 }
 
 .Title {
@@ -256,256 +120,6 @@
     margin-top: 20px;
 }
 
-.CompareLabel {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(178, 178, 178, 0.9);
-    margin: 10px auto;
-    width: 70%;
-    border-radius: 10px;
-
-
-    > div {
-        width: 45%;
-        margin: 5px;
-        font-weight: bolder;
-    }
-}
-
-.DiffBloc {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    > div {
-        position: relative;
-        width: 33%;
-        height: 25px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        background-color: rgba(178, 178, 178, 0.1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        > div {
-            width: 100%;
-            height: 90%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            > p {
-                padding: 1px;
-                overflow: hidden;
-                white-space: normal;
-                max-lines: 1;
-                text-align: center;
-
-                &.DiffValue {
-                    text-overflow: ellipsis;
-                }
-            }
-        }
-
-
-    }
-
-    > div:nth-child(even) {
-        background-color: rgba(178, 178, 178, 0.3);
-        justify-content: start;
-        font-weight: bolder;
-        font-size: 14px;
-
-        > div {
-            width: 100%;
-            display: flex;
-            justify-content: start;
-        }
-
-        > div:nth-child(1) {
-            padding-left: 5px;
-        }
-    }
-}
-
-.DiffAdded {
-    position: absolute;
-    background-color: #03b003;
-    opacity: 0.3;
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-
-    &.DiffName {
-        background-color: rgba(0, 255, 0, 0.7);
-        margin-top: 8px;
-        height: 3px;
-    }
-
-    &.DiffOther {
-        background-color: grey;
-        height: 8px;
-    }
-}
-
-.DiffRemoved {
-    position: absolute;
-    background-color: #b00331;
-    opacity: 0.3;
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-
-    &.DiffName {
-        background-color: rgb(176, 3, 49);
-        margin-top: 8px;
-        height: 3px;
-    }
-
-    &.DiffOther {
-        background-color: grey;
-        height: 8px;
-    }
-}
-
-.DiffChanged {
-    position: absolute;
-    background-color: #f5e906;
-    opacity: 0.3;
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-
-    &.DiffName {
-        background-color: rgb(245, 233, 6);
-        margin-top: 8px;
-        height: 3px;
-    }
-}
-
-
-.DiffUnChanged {
-    position: absolute;
-    background-color: transparent;
-    opacity: 0.3;
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-    border: grey 1px solid;
-
-    &.DiffName {
-        background-color: dimgrey;
-        border: none;
-        margin-top: 8px;
-        height: 3px;
-    }
-}
-
-.ExpandBtnsBloc {
-    background-color: rgba(178, 178, 178, 0.1);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    width: calc(33% - (10px / 3));
-    padding: 2px;
-    border-bottom: white 1px solid;
-
-    > div {
-        display: flex;
-        flex-direction: row;
-        justify-content: end;
-        align-items: center;
-    }
-}
-
-.ClearComparisonButton {
-    position: fixed;
-    left: 5px;
-    bottom: 5px;
-}
-
 .Revert {
     rotate: 180deg;
-}
-
-.WithTooltip {
-    position: relative;
-    display: flex;
-    justify-content: center;
-
-    > div:nth-child(1) {
-        width: 100%;
-    }
-}
-
-.Tooltip {
-    position: absolute;
-    min-width: 150px;
-    text-align: center;
-    background-color: #070707;
-    padding: 3px;
-    border-radius: 3px;
-    color: white;
-    font-size: 14px;
-    max-lines: 1;
-    text-wrap: none;
-    z-index: 1;
-
-    &.Disabled {
-        opacity: 0.5;
-    }
-
-    &.Top {
-        bottom: 100%;
-    }
-
-    &.Bottom {
-        top: 100%;
-    }
-
-    &.Right {
-        left: 100%;
-    }
-
-    &.Left {
-        right: 100%;
-    }
-}
-
-.SessionName {
-    position: relative;
-
-    > div {
-        position: absolute;
-        padding: 1px;
-        top: -8px;
-        right: 50%;
-        font-size: 13px;
-        color: grey;
-        background-color: rgb(80, 80, 80);
-        opacity: 1;
-
-    ;
-    }
-
-    >h2 {
-        margin: 10px auto;
-        padding: 10px 0;
-        border-radius: 15px;
-        border: 1px  rgba(128, 128, 128, 0.31) solid;
-        width: 60%;
-    }
-}
-
-.Changed {
-    background-color: rgba(0, 0, 255, 0.7);
-    padding-bottom: 2px;
-    padding-left: 2px;
-    padding-right: 2px;
-    color: white;
 }

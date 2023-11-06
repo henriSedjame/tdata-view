@@ -3,17 +3,15 @@ import {
     canCompare,
     isComparing,
     sessions, sessionsToCompare,
-    setComparisonNum,
     setIsComparing,
-    setSessionsToCompare,
     setSessionToShow
-} from "../models/state";
-import SessionView from "./SessionView";
-import styles from "../App.module.css";
-import Separator from "./Separator";
-import {TooltipPosition, WithTooltip} from "./WithTooltip";
+} from "../../models/state";
+import SessionItemView from "./session-item/SessionItem.view";
+import g_styles from "../../App.module.css";
+import styles from "./Session.module.css";
+import {TooltipPosition, WithTooltip} from "../with-tooltip/WithTooltip";
 
-export const SessionList : Component = () => {
+export const SessionListView : Component = () => {
 
     const startComparison = () => {
         setIsComparing(true)
@@ -23,7 +21,7 @@ export const SessionList : Component = () => {
     return (
         <>
 
-            <div class={styles.Title}>
+            <div class={g_styles.Title}>
                 <h2> LIST OF SESSIONS </h2>
             </div>
 
@@ -31,7 +29,7 @@ export const SessionList : Component = () => {
                 {
                     (session) =>
                         (
-                            <SessionView session={session} />
+                            <SessionItemView session={session} />
                         )
                 }
             </For>
@@ -40,15 +38,15 @@ export const SessionList : Component = () => {
                 <WithTooltip tooltip="Compare selected sessions" position={TooltipPosition.BOTTOM}>
                 <div
                     classList={{
-                        [styles.Clickable]: true,
+                        [g_styles.Clickable]: true,
                         [styles.CompareLabel]: true,
                     }} onClick={startComparison}>
 
                     <div> {sessionsToCompare().first?.name ?? sessionsToCompare().first?.id}</div>
                      <span classList={{
                          "material-icons": true,
-                         [styles.MediumBtn]: true,
-                         [styles.White]: true,
+                         [g_styles.MediumBtn]: true,
+                         [g_styles.White]: true,
                      }}>compare_arrows</span>
                     <div> {sessionsToCompare().second?.name ?? sessionsToCompare().second?.id}</div>
                 </div>

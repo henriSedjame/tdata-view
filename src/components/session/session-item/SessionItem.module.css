@@ -1,0 +1,41 @@
+.Session {
+    width: 70%;
+    align-items: center;
+    padding: 5px;
+    margin: 4px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(178, 178, 178, 0.3);
+    border-bottom: grey 3px solid;
+    color: #2a2a2a;
+}
+
+
+.SessionTitle {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.BtnsBloc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.EventItem {
+    width: 40%;
+    margin: 2px auto;
+    padding: 5px;
+    background-color: rgba(178, 178, 178, 0.6);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,0 +1,77 @@
+
+.SessionNameInput {
+    height: 25px;
+    width: 80%;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.SessionName {
+    position: relative;
+
+    > div {
+        position: absolute;
+        padding: 1px;
+        top: -8px;
+        right: 50%;
+        font-size: 13px;
+        color: grey;
+        background-color: rgb(80, 80, 80);
+        opacity: 1;
+    }
+
+    >h2 {
+        margin: 10px auto;
+        padding: 10px 0;
+        border-radius: 15px;
+        border: 1px  rgba(128, 128, 128, 0.31) solid;
+        width: 60%;
+    }
+}
+
+.AddSessionBtnsBloc {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px auto;
+    padding-top: 2px;
+    background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 25px;
+}
+
+.AddSession {
+    width: 70%;
+    background-color: rgba(178, 178, 178, 0.2);
+    border-radius: 5px;
+    margin: auto;
+    padding-top: 1px;
+    padding-bottom: 5px;
+}
+
+.LoadDataBloc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    height: 30px;
+    font-style: italic;
+    margin-top:10px ;
+    margin-right: 9%;
+    > input {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.DataBloc {
+    width: 80%;
+    min-height: 400px;
+    scroll-behavior: smooth;
+}
+
+.RedBorder {
+    border: #d93535 2px solid;
+}

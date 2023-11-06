@@ -1,9 +1,10 @@
 import {Component,  For, Show} from "solid-js";
-import {DataPart} from "../models/data-part";
-import {isObject} from "../logics/utils";
-import styles from "../App.module.css";
-import {collapse} from "../logics/services";
-import {collapsed} from "../models/state";
+import {DataPart} from "../../../models/data-part";
+import {isObject} from "../../../logics/utils";
+import g_styles from "../../../App.module.css";
+import styles from "./DataPart.module.css";
+import {collapse} from "../../../logics/services";
+import {collapsed} from "../../../models/state";
 
 export interface DataPartViewProps {
     part: DataPart,
@@ -24,20 +25,20 @@ export const DataPartView: Component<DataPartViewProps> = (props) => {
     return (
         <div class={styles.DataPartBloc}>
             <Show when={isObj}>
-                <b onclick={() => collapse(fullName)} class={styles.Collapse}>
+                <b onclick={() => collapse(fullName)} class={g_styles.Clickable}>
                     <Show when={isCollapsed()} fallback={ <span>+</span> }>
                         <span>-</span>
                     </Show>
                 </b>
             </Show>
-            <span class={styles.PartName}> {props.part.name} </span> <span class={styles.Grey}> : </span>
+            <span class={styles.PartName}> {props.part.name} </span> <span class={g_styles.Grey}> : </span>
                 <Show
                     when={isObj && isCollapsed()}
                     fallback={ <span class={styles.PartValue}> {value} </span> }
                 >
                     <For each={props.part.data}>
                         {
-                            (dpart) => <div class={styles.DataPartBloc}>
+                            (dpart) => <div>
                                 <DataPartView part={dpart} parentName={props.part.name}/>
                             </div>
                         }

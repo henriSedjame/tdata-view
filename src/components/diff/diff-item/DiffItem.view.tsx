@@ -1,19 +1,20 @@
 import {Component, Show} from "solid-js";
-import {ShowDiffType} from "../models/view";
-import styles from "../App.module.css";
-import {collapsedDiffs, showDiffType} from "../models/state";
-import {hasValue, isUnchanged, last, short, tooltip} from "../logics/utils";
-import {DataPartDiff, DiffType} from "../models/diff";
-import {compare} from "../logics/utils/str-diff-utils";
-import {StrPartDiffView} from "./StrPartDiffView";
+import {ShowDiffType} from "../../../models/view";
+import g_styles from "../../../App.module.css";
+import styles from "./DiffItem.module.css";
+import {collapsedDiffs, showDiffType} from "../../../models/state";
+import {hasValue, last, short, tooltip} from "../../../logics/utils";
+import {DataPartDiff, DiffType} from "../../../models/diff";
+import {compare} from "../../../logics/utils/str-diff-utils";
+import {StrPartDiffView} from "../str/StrPartDiffView";
 
-export interface DiffViewProps {
+export interface DiffItemViewProps {
     diff: DataPartDiff;
     numberOfChilds: number;
     onExpand: () => void;
 }
 
-export const DiffView: Component<DiffViewProps> = (props) => {
+export const DiffItemView: Component<DiffItemViewProps> = (props) => {
 
     const expanded = () => {
         return !collapsedDiffs().includes(props.diff.name)
@@ -84,16 +85,16 @@ export const DiffView: Component<DiffViewProps> = (props) => {
 
                 <div>
                     <div>
-                        <span class={styles.EmptyText}>{props.diff.prefix}</span>
+                        <span class={g_styles.EmptyText}>{props.diff.prefix}</span>
                         <Show when={isExpandable()}>
                             <span classList={{
-                                [styles.Clickable]: true
-                            }} onclick={doClick}>{sign()}</span> <span class={styles.EmptyText}>-</span>
+                                [g_styles.Clickable]: true
+                            }} onclick={doClick}>{sign()}</span> <span class={g_styles.EmptyText}>-</span>
                         </Show>
-                        <span class={styles.DiffSimpleName} data-tooltip = {props.diff.name} >{ last(props.diff.name) }</span>
+                        <span data-tooltip = {props.diff.name} >{ last(props.diff.name) }</span>
                         <Show when={!expanded() && props.numberOfChilds > 0}>
-                            <span class={styles.EmptyText}>--</span>
-                            <span class={styles.Grey}>{nbDiff}</span>
+                            <span class={g_styles.EmptyText}>--</span>
+                            <span class={g_styles.Grey}>{nbDiff}</span>
                         </Show>
 
                     </div>

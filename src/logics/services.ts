@@ -48,8 +48,8 @@ export const sessionStorageName = (id: number, sessionName: string) => {
     if (sessionName != '') return `${SESSION_PREFIX}${id}${SLASH}${sessionName.replaceAll(" ", SPACE_REPLACER)}`
     else return `${SESSION_PREFIX}${id}`
 }
-export function addNewSession(id: number, sessionName: string) {
-    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
+export function addNewSession(id: number, sessionName: string, data: any[] = []) {
+    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify(data));
 }
 
 export function updateSessionToCompare(session: Session, select: boolean) {

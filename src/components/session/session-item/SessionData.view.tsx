@@ -1,9 +1,10 @@
 import {Component, For, Show} from "solid-js";
-import {Session} from "../models/session";
-import styles from "../App.module.css";
-import {schemaToShow, setCollapsed, setSchemaToShow} from "../models/state";
-import {DataView} from "./DataView";
-import {TooltipPosition, WithTooltip} from "./WithTooltip";
+import {Session} from "../../../models/session";
+import g_styles from "../../../App.module.css";
+import styles from "./SessionItem.module.css";
+import {schemaToShow, setCollapsed, setSchemaToShow} from "../../../models/state";
+import {DataView} from "../../data/Data.view";
+import {TooltipPosition, WithTooltip} from "../../with-tooltip/WithTooltip";
 
 export interface SessionDataViewProps {
     session: Session
@@ -11,8 +12,8 @@ export interface SessionDataViewProps {
 
 export const SessionDataView: Component<SessionDataViewProps> = (props) => {
     return (
-        <div class={styles.SpaceBottom}>
-            <div class={styles.Title}>
+        <div class={g_styles.SpaceBottom}>
+            <div class={g_styles.Title}>
                 <h3> LIST OF EVENTS</h3>
             </div>
 
@@ -30,8 +31,8 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                          position={TooltipPosition.BOTTOM}>
                                                 <button
                                                     classList={{
-                                                        [styles.IconBtn]: true,
-                                                        [styles.Clickable]: true,
+                                                        [g_styles.IconBtn]: true,
+                                                        [g_styles.Clickable]: true,
                                                     }}
                                                     onClick={() => {
                                                         setCollapsed([])
@@ -40,7 +41,7 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                 >
                                                 <span classList={{
                                                     "material-icons": true,
-                                                    [styles.Black]: true,
+                                                    [g_styles.Black]: true,
                                                 }}>keyboard_arrow_up</span>
                                                 </button>
                                             </WithTooltip>
@@ -50,8 +51,8 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                      position={TooltipPosition.TOP}>
                                             <button
                                                 classList={{
-                                                    [styles.IconBtn]: true,
-                                                    [styles.Clickable]: true,
+                                                    [g_styles.IconBtn]: true,
+                                                    [g_styles.Clickable]: true,
                                                 }}
                                                 onclick={() => {
                                                     setCollapsed([])
@@ -59,7 +60,7 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                 }}
                                             >  <span classList={{
                                                 "material-icons": true,
-                                                [styles.Black]: true,
+                                                [g_styles.Black]: true,
                                             }}>keyboard_arrow_down</span>
                                             </button>
                                         </WithTooltip>

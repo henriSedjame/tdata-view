@@ -1,6 +1,7 @@
-import {ShowDiffType} from "../models/view";
+import {ShowDiffType} from "../../models/view";
 import {Component, For, Show} from "solid-js";
-import styles from "../App.module.css";
+import g_styles from "../../App.module.css";
+import styles from "./Diff.module.css";
 import {
     collapsedDiffs,
     comparisonNum,
@@ -8,19 +9,19 @@ import {
     setComparisonNum,
     setShowDiffType,
     showDiffType
-} from "../models/state";
-import {DiffView} from "./DiffView";
-import {TROW_ID_PREFIX} from "../models/constants";
-import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../logics/utils";
-import {TooltipPosition, WithTooltip} from "./WithTooltip";
-import {DataPartDiff} from "../models/diff";
+} from "../../models/state";
+import {DiffItemView} from "./diff-item/DiffItem.view";
+import {TROW_ID_PREFIX} from "../../models/constants";
+import {hasValue, isCollapsable, isParentOf, isUnchanged} from "../../logics/utils";
+import {TooltipPosition, WithTooltip} from "../with-tooltip/WithTooltip";
+import {DataPartDiff} from "../../models/diff";
 
-export interface DiffsViewProps {
+export interface DiffListViewProps {
     diffs: DataPartDiff[],
     num: number
 }
 
-export const DiffsView: Component<DiffsViewProps> = (props) => {
+export const DiffListView: Component<DiffListViewProps> = (props) => {
 
     let diffsLength = props.diffs.filter(d => !isUnchanged(d)).length;
 
@@ -64,7 +65,6 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
     const showChanged = () => show(ShowDiffType.CHANGED)
 
 
-
     const show = (ty: ShowDiffType) => {
         if (showDiffType() === ty) {
             setShowDiffType(ShowDiffType.ALL)
@@ -72,27 +72,31 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
             setShowDiffType(ty)
         }
     }
+
+    const isShown = (ty: ShowDiffType) => showDiffType() === ty
+
+
     return (
         <Show when={hasDiffs}
               fallback={
                   <div class={styles.DiffHead}>
                       <b classList={{
-                          [styles.Green]: true,
+                          [g_styles.Green]: true,
                       }}> Events are identical </b>
                   </div>
               }
         >
             <div class={styles.Diff}>
                 <div class={styles.DiffHead}>
-                    <span class={styles.TextInfo}> {diffsLength} differences found </span>
+                    <span class={g_styles.TextInfo}> {diffsLength} differences found </span>
                     <Show
                         when={props.num == comparisonNum()}
                         fallback={
                             <WithTooltip tooltip="Show differences" position={TooltipPosition.TOP}>
                             <button
                                 classList={{
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={() => {
                                     location.hash = `#${TROW_ID_PREFIX}${props.num}`
@@ -102,7 +106,7 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             >
                             <span classList={{
                                 "material-icons": true,
-                                [styles.White]: true,
+                                [g_styles.White]: true,
                             }}>keyboard_arrow_down</span>
                             </button>
                             </WithTooltip>
@@ -112,8 +116,8 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                         <button
 
                             classList={{
-                                [styles.IconBtn]: true,
-                                [styles.Clickable]: true,
+                                [g_styles.IconBtn]: true,
+                                [g_styles.Clickable]: true,
                             }}
                             onClick={() => {
                                 setCollapsedDiffs([])
@@ -122,7 +126,7 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                         >
                         <span classList={{
                             "material-icons": true,
-                            [styles.White]: true,
+                            [g_styles.White]: true,
                         }}>keyboard_arrow_up</span>
                         </button>
                         </WithTooltip>
@@ -132,58 +136,61 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                 <Show when={props.num == comparisonNum()}>
                     <div class={styles.ExpandBtnsBloc}>
                         <div>
-                            <WithTooltip tooltip="Show ADDED only" position={TooltipPosition.LEFT}>
+                            <WithTooltip tooltip={isShown(ShowDiffType.ADDED) ? 'Show ALL' : 'Show ADDED only'} position={TooltipPosition.LEFT}>
                             <button
                                 classList={{
                                     "tooltip-left": true,
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={showAdded}>
                         <span classList={{
                             "material-icons": true,
-                            [styles.Green]: true,
-                        }}>arrow_right_alt</span>
+                            [g_styles.Green]: !isShown(ShowDiffType.ADDED),
+                            [styles.ALL] : isShown(ShowDiffType.ADDED)
+                        }}>{isShown(ShowDiffType.ADDED) ? 'ALL' : 'arrow_right_alt'}</span>
                             </button>
                             </WithTooltip>
 
                             <div classList={{
-                                [styles.BtnSeparator]: true,
-                                [styles.BlackSep]: true,
+                                [g_styles.BtnSeparator]: true,
+                                [g_styles.BlackSep]: true,
                             }}></div>
 
-                            <WithTooltip tooltip="Show CHANGED only" position={TooltipPosition.TOP}>
+                            <WithTooltip tooltip={isShown(ShowDiffType.CHANGED) ? 'Show ALL' : 'Show CHANGED only'} position={TooltipPosition.TOP}>
                             <button
                                 classList={{
                                     "tooltip-left": true,
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={showChanged}>
                         <span classList={{
                             "material-icons": true,
-                            [styles.LightGrey]: true,
-                        }}>compare_arrows</span>
+                            [g_styles.LightGrey]: true,
+                            [styles.ALL] : isShown(ShowDiffType.CHANGED)
+                        }}>{isShown(ShowDiffType.CHANGED) ? 'ALL' : 'compare_arrows'}</span>
                             </button>
                             </WithTooltip>
                             <div classList={{
-                                [styles.BtnSeparator]: true,
-                                [styles.BlackSep]: true,
+                                [g_styles.BtnSeparator]: true,
+                                [g_styles.BlackSep]: true,
                             }}></div>
 
-                            <WithTooltip tooltip="Show REMOVED only" position={TooltipPosition.RIGHT}>
+                            <WithTooltip tooltip={isShown(ShowDiffType.REMOVED) ? 'Show ALL' : 'Show REMOVED only'} position={TooltipPosition.RIGHT}>
                             <button
                                 classList={{
                                     "tooltip-left": true,
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={showRemoved}>
                         <span classList={{
                             "material-icons": true,
-                            [styles.Red]: true,
-                            [styles.Revert]: true,
-                        }}>arrow_right_alt</span>
+                            [g_styles.Red]: !isShown(ShowDiffType.REMOVED),
+                            [g_styles.Revert]: !isShown(ShowDiffType.REMOVED),
+                            [styles.ALL] : isShown(ShowDiffType.REMOVED)
+                        }}>{isShown(ShowDiffType.REMOVED) ? 'ALL' : 'arrow_right_alt'}</span>
                             </button>
                             </WithTooltip>
                         </div>
@@ -192,32 +199,32 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                             <button
                                 classList={{
                                     "tooltip-left": true,
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={expandAll}>
                         <span classList={{
                             "material-icons": true,
-                            [styles.Black]: true,
+                            [g_styles.Black]: true,
                         }}>unfold_more</span>
                             </button>
                             </WithTooltip>
                             <div classList={{
-                                [styles.BtnSeparator]: true,
-                                [styles.BlackSep]: true,
+                                [g_styles.BtnSeparator]: true,
+                                [g_styles.BlackSep]: true,
                             }}></div>
 
                             <WithTooltip tooltip="Collapse All" position={TooltipPosition.RIGHT}>
                             <button
                                 classList={{
                                     "tooltip-left": true,
-                                    [styles.IconBtn]: true,
-                                    [styles.Clickable]: true,
+                                    [g_styles.IconBtn]: true,
+                                    [g_styles.Clickable]: true,
                                 }}
                                 onClick={collapseAll}>
                         <span classList={{
                             "material-icons": true,
-                            [styles.Black]: true,
+                            [g_styles.Black]: true,
 
                         }}>unfold_less</span>
                             </button>
@@ -228,9 +235,9 @@ export const DiffsView: Component<DiffsViewProps> = (props) => {
                         {
                             (partDiff) =>
                                 (
-                                    <DiffView diff={partDiff}
-                                              numberOfChilds={expandedDiffs.filter(d => isParentOf(partDiff, d) && hasValue(d) && !isUnchanged(d)).length}
-                                              onExpand={
+                                    <DiffItemView diff={partDiff}
+                                                  numberOfChilds={expandedDiffs.filter(d => isParentOf(partDiff, d) && hasValue(d) && !isUnchanged(d)).length}
+                                                  onExpand={
                                                   () => {
                                                       let dataPartDiffs = expandedDiffs.filter(d => isParentOf(partDiff, d)).map(d => d.name);
 

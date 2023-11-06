@@ -1,6 +1,6 @@
 import {Component, For} from "solid-js";
-import {StrPartDiff} from "../models/str-diff";
-import styles from "../App.module.css";
+import {StrPartDiff} from "../../../models/str-diff";
+import styles from "./StrPartDiff.module.css";
 export interface StrPartDiffViewProps {
     diffs: StrPartDiff[]
 }

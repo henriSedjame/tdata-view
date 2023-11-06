@@ -1,0 +1,18 @@
+
+.CompareLabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(178, 178, 178, 0.9);
+    margin: 10px auto;
+    width: 70%;
+    border-radius: 10px;
+
+
+    > div {
+        width: 45%;
+        margin: 5px;
+        font-weight: bolder;
+    }
+}

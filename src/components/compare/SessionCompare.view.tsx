@@ -1,10 +1,11 @@
 import {Component, For, Show} from "solid-js";
-import {sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../models/state";
-import styles from "../App.module.css";
-import {TableRowData} from "../models/view";
-import {partDiffsOf} from "../logics/utils";
-import {DiffsView} from "./DiffsView";
-import {TROW_ID_PREFIX} from "../models/constants";
+import {sessionsToCompare, setComparisonNum, setIsComparing, setSessionsToCompare} from "../../models/state";
+import g_styles from "../../App.module.css";
+import styles from "./SessionCompare.module.css";
+import {TableRowData} from "../../models/view";
+import {partDiffsOf} from "../../logics/utils";
+import {DiffListView} from "../diff/DiffList.view";
+import {TROW_ID_PREFIX} from "../../models/constants";
 
 export const SessionCompareView: Component = () => {
 
@@ -61,26 +62,21 @@ export const SessionCompareView: Component = () => {
     }
 
     return (
-        <div class={styles.SessionCompare}>
-            <div class={styles.Title}>
+        <div>
+            <div class={g_styles.Title}>
                 <h2> SESSIONS COMPARISON </h2>
             </div>
 
             <button
-                data-tooltip="Clear comparison"
                 classList={{
-                    [styles.IconBtn]: true,
-                    [styles.Clickable]: true,
+                    [g_styles.Btn]: true,
+                    [g_styles.Clickable]: true,
                     [styles.ClearComparisonButton]: true,
                 }} onClick={stopComparison}>
-                     <span classList={{
-                         "material-icons": true,
-                         [styles.BigBtn]: true,
-                         [styles.LightGrey]: true,
-                     }}>cancel</span>
+                     Clear comparison
             </button>
 
-            <table class={styles.SpaceTop}>
+            <table class={g_styles.SpaceTop}>
                 <thead>
                     <tr>
                         <td><b>{session1.name}</b></td>
@@ -99,8 +95,8 @@ export const SessionCompareView: Component = () => {
                                                 (data) =>
                                                     (
                                                         <Show when={data}
-                                                              fallback={(<td class={styles.EmptyText}> ... </td>)}>
-                                                            <td class={styles.LightGrey}>{data?.id}</td>
+                                                              fallback={(<td class={g_styles.EmptyText}> ... </td>)}>
+                                                            <td class={g_styles.LightGrey}>{data?.id}</td>
                                                         </Show>
                                                     )
                                             }
@@ -109,7 +105,7 @@ export const SessionCompareView: Component = () => {
 
                                     <tr>
                                         <td colSpan={rowData.datas.length}>
-                                            <DiffsView diffs={rowData.diffs} num={rowData.num}/>
+                                            <DiffListView diffs={rowData.diffs} num={rowData.num}/>
                                         </td>
                                     </tr>
 

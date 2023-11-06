@@ -1,5 +1,6 @@
 import {Component, createSignal, ParentProps, Show} from "solid-js";
-import styles from "../App.module.css";
+import g_styles from "../../App.module.css";
+import styles from "./WithTooltip.module.css";
 
 export enum TooltipPosition {
     TOP,
@@ -28,7 +29,7 @@ export const WithTooltip : Component<WithTooltipProps> = (props) => {
                 [styles.Bottom]: props.position == TooltipPosition.BOTTOM,
                 [styles.Left]: props.position == TooltipPosition.LEFT,
                 [styles.Right]: props.position == TooltipPosition.RIGHT,
-                [styles.Disabled] : props.disabled === true
+                [g_styles.Disabled] : props.disabled === true
             }}>
                 {props.tooltip}
             </div>
