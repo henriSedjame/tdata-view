@@ -63,7 +63,9 @@ export const SessionCompareView: Component = () => {
     }
 
     return (
-        <div>
+        <div style={{
+            "padding-bottom": "20px"
+        }}>
             <div class={g_styles.Title}>
                 <h2> SESSIONS COMPARISON </h2>
             </div>
@@ -74,7 +76,7 @@ export const SessionCompareView: Component = () => {
                     [g_styles.Clickable]: true,
                     [styles.ClearComparisonButton]: true,
                 }} onClick={stopComparison}>
-                     Clear comparison
+                     CLEAR COMPARISON
             </button>
 
             <table class={g_styles.SpaceTop}>

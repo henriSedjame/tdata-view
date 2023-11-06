@@ -15,7 +15,7 @@ const App: Component = () => {
 
     return (
         <div>
-            <h1 class={styles.White}>DATA COMPARE VIEW</h1>
+            <h1 class={styles.White}>DATA DIFF</h1>
 
             <AddSessionView />
 

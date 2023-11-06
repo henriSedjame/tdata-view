@@ -18,6 +18,7 @@ export function resetSession(id: number, sessionName: string) {
     refetch()
 
 }
+
 export function addToStorage(id: number, sessionName: string, data: SessionData) {
     if (isStoreable(data)) {
 
@@ -48,6 +49,7 @@ export const sessionStorageName = (id: number, sessionName: string) => {
     if (sessionName != '') return `${SESSION_PREFIX}${id}${SLASH}${sessionName.replaceAll(" ", SPACE_REPLACER)}`
     else return `${SESSION_PREFIX}${id}`
 }
+
 export function addNewSession(id: number, sessionName: string, data: any[] = []) {
     localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify(data.map((item) => {
         return {...item, timestamp: new Date().getTime() }
@@ -104,7 +106,6 @@ export function initCurrentSessionId() {
     }
     return undefined
 }
-
 
 export function collapse(fullName : string) {
     if (collapsed()?.includes(fullName)) {

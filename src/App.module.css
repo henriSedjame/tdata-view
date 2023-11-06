@@ -21,7 +21,7 @@
     background-color: black;
     border-radius: 10px;
     font-size: 12px;
-    padding: 10px 25px;
+    padding: 10px 22px;
     color: white;
     cursor: pointer;
     outline: none;
@@ -43,7 +43,7 @@
 }
 
 .Shadow {
-    box-shadow: 0 3px 3px rgba(114, 114, 114, 0.5);
+    box-shadow: 0 0 10px rgba(35, 35, 35, 0.5);
 }
 
 .EmptyText {
@@ -51,8 +51,9 @@
 }
 
 .Green {
-    color: #03b003;
+    color: #004d00;
 }
+
 
 .Red {
     color: #d93535;

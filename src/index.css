@@ -8,7 +8,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #343434;
+  background: linear-gradient(90deg, rgb(46, 40, 49) 0%, rgb(154, 154, 154) 100%);
+
 }
 
 code {
@@ -37,21 +38,4 @@ td, th {
 
 tr:nth-child(even) {
   background-color: lightgrey;
-}
-
-
-[data-tooltip]::before {
-  position : absolute;
-  content : attr(data-tooltip);
-  background : #070707;
-  padding: 5px;
-  margin: auto;
-  border-radius: 5px;
-  color: white;
-  opacity : 0;
-  z-index: 1;
-}
-
-[data-tooltip]:hover::before {
-  opacity : 1;
 }

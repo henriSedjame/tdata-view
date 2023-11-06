@@ -167,7 +167,7 @@ export const DiffListView: Component<DiffListViewProps> = (props) => {
                                 onClick={showChanged}>
                         <span classList={{
                             "material-icons": true,
-                            [g_styles.LightGrey]: true,
+                            [g_styles.Grey]: true,
                             [styles.ALL] : isShown(ShowDiffType.CHANGED)
                         }}>{isShown(ShowDiffType.CHANGED) ? 'ALL' : 'compare_arrows'}</span>
                             </button>
