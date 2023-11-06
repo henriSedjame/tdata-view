@@ -37,7 +37,7 @@ export const AddSessionView: Component = () => {
         localStorage.setItem(CURRENT_SESSION_ID, id.toString())
         localStorage.setItem(LAST_TIMESTAMP, String(new Date().getTime()));
 
-        let d = ldm() ? JSON.parse(data()!) : undefined
+        let d = ldm() ? JSON.parse(data()!)  : undefined
 
         addNewSession(id, sessionName()!, d )
 

@@ -34,7 +34,7 @@ export const SessionCompareView: Component = () => {
 
             if (sdata) {
                 trow.datas.push(sdata)
-                smallest = smallest.filter((d) => d.id !== sdata?.id && d.timpstamp !== sdata?.timpstamp)
+                smallest = smallest.filter((d) => d.id !== sdata?.id && d.timestamp !== sdata?.timestamp)
             } else {
                 trow.datas.push(undefined)
             }

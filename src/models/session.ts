@@ -1,6 +1,6 @@
 export interface SessionData{
     id: string;
-    timpstamp: number;
+    timestamp: number;
     data: any
 }
 

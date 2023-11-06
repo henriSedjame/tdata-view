@@ -27,9 +27,9 @@ export function addToStorage(id: number, sessionName: string, data: SessionData)
 
         if (item) {
             let items: SessionData[] = JSON.parse(item)
-            if (!items.find((item) => item.id === data.id && item.timpstamp === data.timpstamp)) {
+            if (!items.find((item) => item.id === data.id && item.timestamp === data.timestamp)) {
                 localStorage.setItem(key, JSON.stringify([...items, data]));
-                localStorage.setItem(LAST_TIMESTAMP, data.timpstamp.toString());
+                localStorage.setItem(LAST_TIMESTAMP, data.timestamp.toString());
             }
         }
     }
@@ -38,7 +38,7 @@ export function addToStorage(id: number, sessionName: string, data: SessionData)
 export function isStoreable(data: SessionData) {
     let timestamp = localStorage.getItem(LAST_TIMESTAMP);
     if (timestamp) {
-        return data.timpstamp > Number.parseInt(timestamp);
+        return data.timestamp > Number.parseInt(timestamp);
     }
     initLastTimestamp()
     return true;
@@ -49,7 +49,9 @@ export const sessionStorageName = (id: number, sessionName: string) => {
     else return `${SESSION_PREFIX}${id}`
 }
 export function addNewSession(id: number, sessionName: string, data: any[] = []) {
-    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify(data));
+    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify(data.map((item) => {
+        return {...item, timestamp: new Date().getTime() }
+    })));
 }
 
 export function updateSessionToCompare(session: Session, select: boolean) {
@@ -144,7 +146,7 @@ export  const fetchData = async () => {
             if (sid && sname) {
                 addToStorage(sid, sname, {
                     id: data.id,
-                    timpstamp: data.timestamp,
+                    timestamp: data.timestamp,
                     data: data.data,
                 })
 
