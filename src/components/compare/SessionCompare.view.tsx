@@ -59,6 +59,7 @@ export const SessionCompareView: Component = () => {
             second: null
         })
         setComparisonNum(null)
+        location.hash = ""
     }
 
     return (

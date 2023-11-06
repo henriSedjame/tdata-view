@@ -134,8 +134,8 @@ export const AddSessionView: Component = () => {
                 </div>
             }>
                 <div class={styles.SessionName}>
-                    <div> CURRENT SESSION</div>
-                    <h2 class={g_styles.Grey}> {sessionName()} </h2>
+                    <div> CURRENT SESSION </div>
+                    <h2 class={g_styles.LightGrey}> {sessionName()} </h2>
                 </div>
 
             </Show>
