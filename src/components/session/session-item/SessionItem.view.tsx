@@ -149,7 +149,7 @@ const SessionItemView: Component<SessionViewProps> = (props) => {
                                 [g_styles.Red]: true,
                             }}>delete_outline</span>
                         </button>
-                        </WithTooltip>.
+                        </WithTooltip>
                     </Show>
                 </div>
 

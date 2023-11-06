@@ -87,12 +87,14 @@
     color: #ff9100;
 }
 
+.Purple {
+    color: #57386c;
+}
 
 .TextInfo {
     font-style: italic;
     color: #ffffff;
 }
-
 
 .BtnSeparator {
     width: 1px;
@@ -123,4 +125,23 @@
 
 .Revert {
     rotate: 180deg;
+}
+
+.AppTitle {
+    padding: 20px 0;
+    font-size: 50px;
+}
+
+.AppContent {
+    position: relative;
+
+    .Img {
+        position: absolute;
+        top: 0;
+        right: 20%;
+        z-index: -1;
+        mix-blend-mode: overlay;
+        opacity: 0.2;
+        filter: saturate(0);
+    }
 }

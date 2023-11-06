@@ -9,7 +9,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(90deg, rgb(46, 40, 49) 0%, rgb(154, 154, 154) 100%);
-
 }
 
 code {

@@ -14,17 +14,26 @@ const App: Component = () => {
     fetchData().then(() => {});
 
     return (
-        <div>
-            <h1 class={styles.White}>DATA DIFF</h1>
+        <div class={styles.AppContent}>
+            <div>
+                <div classList={{
+                    [styles.Purple]: true,
+                    [styles.AppTitle]: true
+                }}>DATA DIFF
+                </div>
 
-            <AddSessionView />
+                <AddSessionView/>
 
-            <SessionListView />
+                <SessionListView/>
 
-            <Show when={isComparing()}>
-                <SessionCompareView />
-            </Show>
+                <Show when={isComparing()}>
+                    <SessionCompareView/>
+                </Show>
+            </div>
 
+            <div class={styles.Img}>
+                <img src="../src/assets/bg.png" alt="logo" class={styles.Logo}/>
+            </div>
         </div>
     );
 };
