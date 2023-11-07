@@ -3,6 +3,7 @@ import {DataPartDiff} from "./diff";
 
 export interface TableRowData {
     num: number;
+    id: string;
     datas: (SessionData| undefined)[];
     diffs: DataPartDiff[];
 }

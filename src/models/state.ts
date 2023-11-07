@@ -33,7 +33,7 @@ const initialState: AppState = {
     },
     collapsed: [],
     collapsedDiffs: [],
-    showDiffType: ShowDiffType.ALL
+    showDiffType: ShowDiffType.CHANGED
 }
 
 export const [store, setStore] = createStore(initialState)

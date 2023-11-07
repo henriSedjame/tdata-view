@@ -7,6 +7,7 @@ import {hasValue, last, short, tooltip} from "../../../logics/utils";
 import {DataPartDiff, DiffType} from "../../../models/diff";
 import {compare} from "../../../logics/utils/str-diff-utils";
 import {StrPartDiffView} from "../str/StrPartDiffView";
+import {TooltipPosition, WithTooltip} from "../../with-tooltip/WithTooltip";
 
 export interface DiffItemViewProps {
     diff: DataPartDiff;
@@ -73,13 +74,17 @@ export const DiffItemView: Component<DiffItemViewProps> = (props) => {
 
                     }}></div>
 
-                    <div data-tooltip={ tooltip(props.diff.prev?.toString())}>
-                        <Show when={isUnchangedDiff()}
-                              fallback={<StrPartDiffView diffs={compareResult.prev} />}
-                        >
-                            <p class={styles.DiffValue}>{short(props.diff.prev?.toString())}</p>
-                        </Show>
-                    </div>
+
+                    <WithTooltip tooltip={ tooltip(props.diff.prev?.toString()) } position={TooltipPosition.BOTTOM}>
+                        <div>
+                            <Show when={isUnchangedDiff()}
+                                  fallback={<StrPartDiffView diffs={compareResult.prev}/>}
+                            >
+                                <p class={styles.DiffValue}>{short(props.diff.prev?.toString())}</p>
+                            </Show>
+                        </div>
+                    </WithTooltip>
+
 
                 </div>
 
@@ -91,12 +96,13 @@ export const DiffItemView: Component<DiffItemViewProps> = (props) => {
                                 [g_styles.Clickable]: true
                             }} onclick={doClick}>{sign()}</span> <span class={g_styles.EmptyText}>-</span>
                         </Show>
-                        <span data-tooltip = {props.diff.name} >{ last(props.diff.name) }</span>
+                        <WithTooltip tooltip={ props.diff.name} position={TooltipPosition.TOP}>
+                            <span data-tooltip = {props.diff.name} >{ last(props.diff.name) }</span>
+                        </WithTooltip>
                         <Show when={!expanded() && props.numberOfChilds > 0}>
                             <span class={g_styles.EmptyText}>--</span>
                             <span class={g_styles.Grey}>{nbDiff}</span>
                         </Show>
-
                     </div>
                     <div classList={{
                         [styles.DiffAdded]: props.diff.diffType === DiffType.ADDED,
@@ -118,10 +124,17 @@ export const DiffItemView: Component<DiffItemViewProps> = (props) => {
                             [styles.DiffOther]: props.diff.next === undefined,
                         }}
                     ></div>
-                    <div data-tooltip={ tooltip(props.diff.next?.toString())}>
-                        { short(props.diff.next?.toString())}
 
-                    </div>
+                    <WithTooltip tooltip={ tooltip(props.diff.next?.toString()) } position={TooltipPosition.BOTTOM}>
+                        <div>
+                            <Show when={isUnchangedDiff()}
+                                  fallback={<StrPartDiffView diffs={compareResult.next}/>}
+                            >
+                                <p class={styles.DiffValue}>{short(props.diff.next?.toString())}</p>
+                            </Show>
+                        </div>
+                    </WithTooltip>
+
                 </div>
 
             </div>

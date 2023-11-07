@@ -32,7 +32,7 @@ const App: Component = () => {
             </div>
 
             <div class={styles.Img}>
-                <img src="../src/assets/bg.png" alt="logo" class={styles.Logo}/>
+                <img src="../src/assets/bg.png" alt="logo" class={styles.Logo} width="1237" height="1223"/>
             </div>
         </div>
     );

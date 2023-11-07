@@ -25,7 +25,7 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                 <div class={styles.EventItem}>
                                     <div>{data.id}</div>
                                     <Show
-                                        when={schemaToShow() !== `${data.id}_${data.timpstamp}`}
+                                        when={schemaToShow() !== `${data.id}_${data.timestamp}`}
                                         fallback={
                                             <WithTooltip tooltip="Hide the data structure"
                                                          position={TooltipPosition.BOTTOM}>
@@ -56,7 +56,7 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                                 }}
                                                 onclick={() => {
                                                     setCollapsed([])
-                                                    setSchemaToShow(`${data.id}_${data.timpstamp}`)
+                                                    setSchemaToShow(`${data.id}_${data.timestamp}`)
                                                 }}
                                             >  <span classList={{
                                                 "material-icons": true,
@@ -66,7 +66,7 @@ export const SessionDataView: Component<SessionDataViewProps> = (props) => {
                                         </WithTooltip>
                                     </Show>
                                 </div>
-                                <Show when={schemaToShow() === `${data.id}_${data.timpstamp}`}>
+                                <Show when={schemaToShow() === `${data.id}_${data.timestamp}`}>
                                     <DataView data={data.data}/>
                                 </Show>
                             </>

@@ -99,6 +99,7 @@ export const AddSessionView: Component = () => {
                 <div>
                     <div>
                         <input
+                            type="text"
                             placeholder="Enter a session name"
                             class={styles.SessionNameInput}
                             value={sessionName() || ""}
@@ -135,7 +136,7 @@ export const AddSessionView: Component = () => {
             }>
                 <div class={styles.SessionName}>
                     <div> CURRENT SESSION </div>
-                    <h2 class={g_styles.LightGrey}> {sessionName()} </h2>
+                    <h2 class={g_styles.Grey}> {sessionName()} </h2>
                 </div>
 
             </Show>
@@ -155,7 +156,7 @@ export const AddSessionView: Component = () => {
                         onClick={() => startSession()}>
                         <span classList={{
                             "material-icons": true,
-                            [g_styles.Green]: !disableStartBtn(),
+                            [g_styles.LightGreen]: !disableStartBtn(),
                             [g_styles.Grey]: disableStartBtn(),
                             [g_styles.BigBtn]: true,
                         }}>play_circle_outline</span>

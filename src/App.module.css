@@ -51,9 +51,12 @@
 }
 
 .Green {
-    color: #004d00;
+    color: #015901;
 }
 
+.LightGreen {
+    color: #009100;
+}
 
 .Red {
     color: #d93535;
@@ -134,11 +137,11 @@
 
 .AppContent {
     position: relative;
-
+    width: 100%;
     .Img {
         position: absolute;
         top: 0;
-        right: 20%;
+        left: 0;
         z-index: -1;
         mix-blend-mode: overlay;
         opacity: 0.2;

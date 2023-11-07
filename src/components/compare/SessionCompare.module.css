@@ -1,5 +1,25 @@
 .ClearComparisonButton {
     position: fixed;
-    left: 5px;
-    bottom: 5px;
+    left: 15px;
+    bottom: 15px;
+
+    border: none;
+    background-color: #934d4d;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 10px 22px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+
+
+.Thead {
+    width: 48%;
+}
+
+.SwitchBtn {
+    height: 100%;
+
 }

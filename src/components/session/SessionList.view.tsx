@@ -35,7 +35,7 @@ export const SessionListView : Component = () => {
             </For>
 
             <Show when={canCompare() && !isComparing()}>
-                <WithTooltip tooltip="Compare selected sessions" position={TooltipPosition.BOTTOM}>
+                <WithTooltip tooltip="Compare selected sessions" position={TooltipPosition.TOP}>
                 <div
                     classList={{
                         [g_styles.Clickable]: true,

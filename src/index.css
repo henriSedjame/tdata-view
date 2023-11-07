@@ -38,3 +38,13 @@ td, th {
 tr:nth-child(even) {
   background-color: lightgrey;
 }
+
+input[type=text] {
+  font-size: 14px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+textarea {
+  font-size: 14px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
