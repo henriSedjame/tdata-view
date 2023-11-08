@@ -1,10 +1,18 @@
 import {fetchEventSource} from "@microsoft/fetch-event-source";
-import {CURRENT_SESSION_ID, LAST_TIMESTAMP, SESSION_PREFIX, SLASH, SPACE_REPLACER, URL} from "../models/constants";
+import {
+    SET_REFACTO_BRANCH_URL,
+    CURRENT_SESSION_ID,
+    LAST_TIMESTAMP,
+    SESSION_PREFIX,
+    SLASH,
+    SPACE_REPLACER,
+    FETCH_DATA_URL, FETCH_BRANCHES_URL
+} from "../models/constants";
 import {
     collapsed,
     currentSessionId,
     refetch, sessionName,
-    sessionsToCompare, setCollapsed, setCurrentSessionId, setSessionName,
+    sessionsToCompare, setCollapsed, setCurrentSessionId, setIsMasterBranch, setSessionName,
     setSessionsToCompare, setSessionToShow
 } from "../models/state";
 import {Session, SessionData} from "../models/session";
@@ -130,9 +138,8 @@ export function getLastSessionId() {
 }
 
 export  const fetchData = async () => {
-    console.log("Run fetch");
 
-    await fetchEventSource(URL, {
+    await fetchEventSource(FETCH_DATA_URL, {
         headers: {
             'Content-Type': 'application/x-ndjson',
             'x-bff-key': 'ah1MPO-izehIHD-QZZ9y88n-kku876'
@@ -159,3 +166,29 @@ export  const fetchData = async () => {
     });
 
 };
+
+
+export  const fetchBranches = async () => {
+
+    await fetchEventSource(FETCH_BRANCHES_URL, {
+        headers: {
+            'Content-Type': 'application/x-ndjson',
+            'x-bff-key': 'ah1MPO-izehIHD-QZZ9y88n-kku876'
+        },
+        onmessage: (event) => {
+            let data = JSON.parse(event.data)
+            setIsMasterBranch(data.isMaster)
+        },
+        keepalive: true,
+    });
+
+};
+
+export const setBranch = async (branch: string): Promise<void> => {
+    await fetch(`${SET_REFACTO_BRANCH_URL}${branch}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-bff-key': 'ah1MPO-izehIHD-QZZ9y88n-kku876'
+        }
+    })
+}

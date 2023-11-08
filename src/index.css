@@ -48,3 +48,11 @@ textarea {
   font-size: 14px;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
+input[type=checkbox] {
+  :checked {
+    width: 100px;
+    height: 100px;
+    background-color: #a60f0f;
+  }
+}

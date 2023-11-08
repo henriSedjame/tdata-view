@@ -1,0 +1,59 @@
+
+.Title {
+    font-size: 20px;
+    color: #4b4b4b;
+    font-weight: bolder;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.SubTitle{
+    color: #363333;
+    padding-bottom: 8px;
+}
+
+.ParametersBloc {
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px 0;
+    background-color: rgba(178, 178, 178, 0.2);
+
+    border-radius: 5px;
+
+    .Branches {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+}
+
+.Branch {
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.Sse{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    > span:nth-child(1) {
+        color: #363333;
+    }
+
+    > span:nth-child(2) {
+        font-size: 14px;
+        color: white;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+
+}
+
+.Separator {
+    width: 150px;
+    height: 1px;
+    margin: 5px auto;
+    background-color: #5e5c5c;
+}

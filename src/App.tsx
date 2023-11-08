@@ -1,10 +1,12 @@
 import {Component, Show} from 'solid-js';
 import styles from './App.module.css';
-import {isComparing} from "./models/state";
-import {fetchData, initLastTimestamp} from "./logics/services";
+import {isComparing, isMasterBranch, setIsMasterBranch} from "./models/state";
+import {fetchBranches, fetchData, initLastTimestamp, setBranch} from "./logics/services";
 import {SessionListView} from "./components/session/SessionList.view";
 import {SessionCompareView} from "./components/compare/SessionCompare.view";
 import {AddSessionView} from "./components/add-session/AddSession.view";
+import {SwitchBtnView} from "./components/switch-btn/SwitchBtn.view";
+import {ParametersView} from "./components/parameters/Parameters.view";
 
 
 const App: Component = () => {
@@ -12,6 +14,8 @@ const App: Component = () => {
     initLastTimestamp()
 
     fetchData().then(() => {});
+
+    fetchBranches().then(() => {});
 
     return (
         <div class={styles.AppContent}>
@@ -23,6 +27,8 @@ const App: Component = () => {
                 </div>
 
                 <AddSessionView/>
+
+                <ParametersView />
 
                 <SessionListView/>
 

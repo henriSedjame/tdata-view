@@ -16,7 +16,8 @@ export interface AppState {
     sessionsToCompare: SessionsToCompare,
     collapsed: string[],
     collapsedDiffs: string[],
-    showDiffType: ShowDiffType
+    showDiffType: ShowDiffType,
+    isMasterBranch: boolean
 }
 
 const initialState: AppState = {
@@ -33,7 +34,8 @@ const initialState: AppState = {
     },
     collapsed: [],
     collapsedDiffs: [],
-    showDiffType: ShowDiffType.CHANGED
+    showDiffType: ShowDiffType.CHANGED,
+    isMasterBranch: true
 }
 
 export const [store, setStore] = createStore(initialState)
@@ -117,6 +119,12 @@ export const [showDiffType, setShowDiffType] = [
     }
 ];
 
+export const [isMasterBranch, setIsMasterBranch] = [
+    () => store.isMasterBranch,
+    (b: boolean) => {
+        setStore('isMasterBranch', b)
+    }
+];
 
 export const canCompare = () => {
     const sc = sessionsToCompare();
@@ -125,6 +133,11 @@ export const canCompare = () => {
 
 export const sessionToCompareIds = () => {
     return [sessionsToCompare().first?.id, sessionsToCompare().second?.id]
+}
+
+
+export const isSessionRunning = () => {
+    return currentSessionId() !== undefined && currentSessionId() !== null
 }
 
 // export const [currentSessionId, setCurrentSessionId] = createSignal(initCurrentSessionId())
