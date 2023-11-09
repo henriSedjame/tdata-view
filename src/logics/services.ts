@@ -47,7 +47,7 @@ export function addToStorage(id: number, sessionName: string, data: SessionData)
 export function isStoreable(data: SessionData) {
     let timestamp = localStorage.getItem(LAST_TIMESTAMP);
     if (timestamp) {
-        return data.timestamp > Number.parseInt(timestamp);
+        return data.timestamp >= Number.parseInt(timestamp);
     }
     initLastTimestamp()
     return true;
@@ -176,7 +176,7 @@ export  const fetchBranches = async () => {
             'x-bff-key': 'ah1MPO-izehIHD-QZZ9y88n-kku876'
         },
         onmessage: (event) => {
-            let data = JSON.parse(event.data)
+            let data = JSON.parse(event.data) as { isMaster: boolean }
             setIsMasterBranch(data.isMaster)
         },
         keepalive: true,
