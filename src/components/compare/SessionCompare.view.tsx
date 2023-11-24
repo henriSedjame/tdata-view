@@ -8,6 +8,7 @@ import {DiffListView} from "../diff/DiffList.view";
 import {TROW_ID_PREFIX} from "../../models/constants";
 import {DiffType} from "../../models/diff";
 import {TooltipPosition, WithTooltip} from "../with-tooltip/WithTooltip";
+import {resetAll} from "../../logics/services";
 
 export const SessionCompareView: Component = () => {
 
@@ -90,6 +91,7 @@ export const SessionCompareView: Component = () => {
 
 
     const stopComparison = () => {
+        resetAll()
         setIsComparing(false)
         setSessionsToCompare({
             first: null,

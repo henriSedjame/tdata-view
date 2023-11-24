@@ -8,22 +8,22 @@ import {
     sessionName,
     setCurrentSessionId,
     setLastSessionId,
-    setSessionName
+    setSessionName, setSessionToShow
 } from "../../models/state";
 import {CURRENT_SESSION_ID, LAST_TIMESTAMP} from "../../models/constants";
-import {addNewSession} from "../../logics/services";
+import {addNewSession, resetAll} from "../../logics/services";
 import {TooltipPosition, WithTooltip} from "../with-tooltip/WithTooltip";
 
 
 export const AddSessionView: Component = () => {
 
-    const [ldm, setLdm] = createSignal(false)
+    const [loadDataManually, setLoadDataManually] = createSignal(false)
 
     const [data, setData] = createSignal<string | undefined>(undefined)
 
     const disableStartBtn = () => {
         if (errorMsg()) return true
-        return ((sessionName() == null || sessionName()?.length == 0) || (ldm() ? (data() === undefined || data()?.length === 0) : false)) || !disableStopBtn()
+        return ((sessionName() == null || sessionName()?.length == 0) || (loadDataManually() ? (data() === undefined || data()?.length === 0) : false)) || !disableStopBtn()
     }
 
     const disableStopBtn = () => {
@@ -31,18 +31,22 @@ export const AddSessionView: Component = () => {
     }
 
     const startSession = () => {
+
+        resetAll()
+
         let id = (lastSessionId() || 0) + 1;
         setCurrentSessionId(id)
         setLastSessionId(currentSessionId())
         localStorage.setItem(CURRENT_SESSION_ID, id.toString())
         localStorage.setItem(LAST_TIMESTAMP, String(new Date().getTime()));
 
-        let d = ldm() ? JSON.parse(data()!)  : undefined
-
+        let d = loadDataManually() ? JSON.parse(data()!)  : undefined
         addNewSession(id, sessionName()!, d )
 
-        if (ldm()) {
-            setLdm(false)
+        setSessionToShow(id)
+
+        if (loadDataManually()) {
+            setLoadDataManually(false)
             setData(undefined)
             stopSession()
         }
@@ -112,19 +116,19 @@ export const AddSessionView: Component = () => {
                             <span class={g_styles.White}> Load data manually</span>
                             <input type="checkbox"
                                    class={g_styles.Clickable}
-                                   checked={ldm()}
-                                   onchange={(e) => setLdm(e.currentTarget.checked)}
+                                   checked={loadDataManually()}
+                                   onchange={(e) => setLoadDataManually(e.currentTarget.checked)}
                             />
                         </div>
 
-                        <Show when={ldm()}>
+                        <Show when={loadDataManually()}>
                             <textarea classList={{
                                 [styles.DataBloc]: true,
                                 [styles.RedBorder]: errorMsg() != undefined
                             }}
                                       placeholder={dataPlaceholder}
                                       value={data() || ""}
-                                      required={ldm()}
+                                      required={loadDataManually()}
                                       oninput={(e) => setData(e.currentTarget.value)}
                             ></textarea>
                             <p class={g_styles.Red}> {errorMsg()}</p>

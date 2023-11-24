@@ -1,30 +1,47 @@
 import {fetchEventSource} from "@microsoft/fetch-event-source";
 import {
-    SET_REFACTO_BRANCH_URL,
     CURRENT_SESSION_ID,
+    FETCH_BRANCHES_URL,
+    FETCH_DATA_URL,
     LAST_TIMESTAMP,
     SESSION_PREFIX,
+    SET_REFACTO_BRANCH_URL,
     SLASH,
-    SPACE_REPLACER,
-    FETCH_DATA_URL, FETCH_BRANCHES_URL
+    SPACE_REPLACER
 } from "../models/constants";
 import {
     collapsed,
     currentSessionId,
-    refetch, sessionName,
-    sessionsToCompare, setCollapsed, setCurrentSessionId, setIsMasterBranch, setSessionName,
-    setSessionsToCompare, setSessionToShow
+    refetch,
+    sessionName,
+    sessionsToCompare,
+    setCollapsed,
+    setCollapsedDiffs,
+    setCurrentSessionId,
+    setIsMasterBranch,
+    setSessionName,
+    setSessionsToCompare,
+    setSessionToShow,
+    setShowDiffType
 } from "../models/state";
 import {Session, SessionData} from "../models/session";
+import {ShowDiffType} from "../models/view";
 
-export function resetSession(id: number, sessionName: string) {
+
+export function resetAll() {
     setCollapsed([])
     setSessionToShow(null)
-    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
+    setCollapsedDiffs([])
+    setShowDiffType(ShowDiffType.CHANGED)
+}
+
+export function resetSession(id: number, sessionName: string) {
+    resetAll()
     setCurrentSessionId(id)
     setSessionName(sessionName)
+    localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
+    localStorage.setItem(LAST_TIMESTAMP, String(new Date().getTime()));
     refetch()
-
 }
 
 export function addToStorage(id: number, sessionName: string, data: SessionData) {

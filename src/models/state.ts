@@ -1,4 +1,4 @@
-import {createResource, createSignal} from "solid-js";
+import {createResource} from "solid-js";
 import {SessionsToCompare, ShowDiffType} from "./view";
 import {SESSION_PREFIX, SLASH, SPACE_REPLACER} from "./constants";
 import {getLastSessionId, initCurrentSessionId} from "../logics/services";
@@ -50,6 +50,7 @@ export const [currentSessionId, setCurrentSessionId] = [
 export const [sessionName, setSessionName] = [
     () => store.sessionName,
     (name: string | null) => {
+
         setStore('sessionName', name)
     }
 ];
@@ -135,35 +136,9 @@ export const sessionToCompareIds = () => {
     return [sessionsToCompare().first?.id, sessionsToCompare().second?.id]
 }
 
-
 export const isSessionRunning = () => {
     return currentSessionId() !== undefined && currentSessionId() !== null
 }
-
-// export const [currentSessionId, setCurrentSessionId] = createSignal(initCurrentSessionId())
-
-//export const [sessionName, setSessionName] = createSignal<string | null>(null)
-
-// export const [lastSessionId, setLastSessionId] = createSignal(getLastSessionId())
-
-//export const [comparisonNum, setComparisonNum] = createSignal<number| null>(null)
-
-// export const [isComparing, setIsComparing] = createSignal(false)
-
-//export const [sessionToShow, setSessionToShow] = createSignal<number | null>(null)
-
-//export const [schemaToShow, setSchemaToShow] = createSignal<string | null>(null)
-
-//export const [sessionsToCompare, setSessionsToCompare] = createSignal<SessionsToCompare>({
-//    first: null,
-//    second: null
-//})
-
-//export const [collapsed, setCollapsed] = createSignal<string[]>([])
-
-//export const [collapsedDiffs, setCollapsedDiffs] = createSignal<string[]>([])
-
-//export const [showDiffType, setShowDiffType] = createSignal<ShowDiffType>(ShowDiffType.ALL)
 
 
 export const [sessions, {mutate, refetch}] = createResource(() => {
