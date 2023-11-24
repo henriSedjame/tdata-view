@@ -34,7 +34,7 @@ export const DataPartView: Component<DataPartViewProps> = (props) => {
             <span class={styles.PartName}> {props.part.name} </span> <span class={g_styles.Grey}> : </span>
                 <Show
                     when={isObj && isCollapsed()}
-                    fallback={ <span class={styles.PartValue}> {value} </span> }
+                    fallback={ <span class={styles.PartValue}> {value.toString()} </span> }
                 >
                     <For each={props.part.data}>
                         {

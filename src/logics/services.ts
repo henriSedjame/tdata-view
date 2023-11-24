@@ -39,6 +39,7 @@ export function resetSession(id: number, sessionName: string) {
     resetAll()
     setCurrentSessionId(id)
     setSessionName(sessionName)
+    setSessionToShow(id)
     localStorage.setItem(sessionStorageName(id, sessionName), JSON.stringify([]));
     localStorage.setItem(LAST_TIMESTAMP, String(new Date().getTime()));
     refetch()
